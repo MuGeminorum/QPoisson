@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>opencv_qt_demoClass</class>
+ <widget class="QMainWindow" name="opencv_qt_demoClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>661</width>
+    <height>499</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>opencv_qt_demo</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QMdiArea" name="mdiArea">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>661</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>621</width>
+      <height>0</height>
+     </size>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave"/>
+   <addaction name="separator"/>
+   <addaction name="actionMirrorH"/>
+   <addaction name="actionMirrorV"/>
+   <addaction name="actionTurn"/>
+   <addaction name="actionInvert"/>
+   <addaction name="actionGrey"/>
+   <addaction name="separator"/>
+   <addaction name="actionRect"/>
+   <addaction name="actionPolygon"/>
+   <addaction name="actionOval"/>
+   <addaction name="actionEmpty"/>
+   <addaction name="separator"/>
+   <addaction name="actionImport"/>
+   <addaction name="actionExport"/>
+   <addaction name="actionInsert"/>
+   <addaction name="actionPossion"/>
+   <addaction name="actionErase"/>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>661</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOpen">
+    <property name="title">
+     <string>File</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuTransform">
+    <property name="title">
+     <string>Transform</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSelect">
+    <property name="title">
+     <string>Select</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuPossion">
+    <property name="title">
+     <string>Possion</string>
+    </property>
+   </widget>
+   <addaction name="menuOpen"/>
+   <addaction name="menuTransform"/>
+   <addaction name="menuSelect"/>
+   <addaction name="menuPossion"/>
+  </widget>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/file_32px_572850_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/file_32px_572850_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/diskette_32px_572819_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/diskette_32px_572819_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="toolTip">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionMirrorH">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/flip_horizontal_32px_572874_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/flip_horizontal_32px_572874_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>MirrorH</string>
+   </property>
+  </action>
+  <action name="actionMirrorV">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/flip_vertical_32px_572875_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/flip_vertical_32px_572875_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>MirrorV</string>
+   </property>
+  </action>
+  <action name="actionTurn">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/reload_32px_573065_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/reload_32px_573065_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Turn</string>
+   </property>
+  </action>
+  <action name="actionInvert">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/protocol_32px_573045_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/protocol_32px_573045_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Invert</string>
+   </property>
+  </action>
+  <action name="actionGrey">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/contrast_32px_572784_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/contrast_32px_572784_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Grey</string>
+   </property>
+  </action>
+  <action name="actionPolygon">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/polygon_32px_1169471_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/polygon_32px_1169471_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Polygon</string>
+   </property>
+  </action>
+  <action name="actionRect">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/square_32px_1170579_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/square_32px_1170579_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Rect</string>
+   </property>
+  </action>
+  <action name="actionOval">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/ellipse_stroked_32px_1168912_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/ellipse_stroked_32px_1168912_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Oval</string>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/windows_32px_573226_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/windows_32px_573226_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/document_diskette_32px_577567_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/document_diskette_32px_577567_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionInsert">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/file_transfer_32px_572861_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/file_transfer_32px_572861_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Insert</string>
+   </property>
+  </action>
+  <action name="actionPossion">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/match_width_and_height_32px_572964_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/match_width_and_height_32px_572964_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Possion</string>
+   </property>
+  </action>
+  <action name="actionErase">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/eraser_32px_1197080_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/eraser_32px_1197080_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Erase</string>
+   </property>
+  </action>
+  <action name="actionEmpty">
+   <property name="icon">
+    <iconset resource="opencv_qt_demo.qrc">
+     <normaloff>:/opencv_qt_demo/Resources/empty_32px_1161884_easyicon.net.ico</normaloff>:/opencv_qt_demo/Resources/empty_32px_1161884_easyicon.net.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Empty</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="opencv_qt_demo.qrc"/>
+ </resources>
+ <connections/>
+</ui>
