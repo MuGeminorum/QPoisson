@@ -62,7 +62,7 @@ int digit(int y)
 	}
 }
 
-void printsln(Mat1f b)
+void printsln(Mat4b b)
 {
 	FILE *fp = fopen("f:\\downloads\\x.txt", "w");
 	//fprintf_s(fp, "{\n");
@@ -71,7 +71,8 @@ void printsln(Mat1f b)
 		//fprintf_s(fp, "{");
 		for (int j = 0; j < 4; j++)
 		{
-			int cp = toINT(itoUCHAR(toINT(b.at<float>(i, j))));
+			int cp = toINT(itoUCHAR(toINT(b.at<uchar>(i, j))));
+			//int cp = toINT(itoUCHAR(toINT(b.at<float>(i, j))));
 			if (cp >= 0)
 			{
 				//fprintf_s(fp, (j < 3) ? "+%03d, " : "+%03d ", cp);
@@ -108,16 +109,17 @@ void printsln(Mat1f b)
 	fclose(fp);
 }
 
-void printLap(Mat1f iA)
+void printLap(SMat1f iA)
 {
 	FILE *fp = fopen("f:\\downloads\\A.txt", "w");
 	//fprintf_s(fp, "{\n");
-	for (int i = 0; i < iA.rows; i++)
+	for (int i = 0; i < iA.rows(); i++)
 	{
 		//fprintf_s(fp, "{");
-		for (int j = 0; j < iA.cols; j++)
+		for (int j = 0; j < iA.cols(); j++)
 		{
-			int cp = toINT(iA.at<float>(i, j));
+			int cp = toINT(iA.coeffRef(i, j));
+			//int cp = toINT(iA.at<float>(i, j));
 			if (cp >= 0)
 			{
 				//fprintf_s(fp, (j < iA.cols - 1) ? "+%01d, " : "+%01d ", cp);

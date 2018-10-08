@@ -9,6 +9,8 @@ showImage::showImage(QWidget *parent)
 	figure = FIGURE_NONE;
 	startPos = curPos = endPos = QPoint(0, 0);
 	preArea.setRect(0, 0, 0, 0);
+
+	shape.iNum = 0;
 }
 
 
@@ -319,16 +321,22 @@ void showImage::confirmRect(QMouseEvent *event)    // mouseReleaseEvent
 		endPos = confine(event->pos());
 
 		fillRect(&pix);
-		preArea = Positive(startPos, endPos); 
-		shape = mf->Filtered(img, pix, preArea);
 
-		if (leastPix(startPos, endPos) && shape.iNum > 0)
+		if (leastPix(startPos, endPos))
 		{
-			pix = shape.pMat;
-			clearPix(&tempix);
-			update();
-			startPos = curPos = endPos = QPoint(0, 0);
-			emit selectcomplete(true);
+
+			preArea = Positive(startPos, endPos);
+			pix = mf->Filtered(img, pix, preArea, &shape);
+
+			if (shape.iNum > 0)
+			{
+				clearPix(&tempix);
+				update();
+				startPos = curPos = endPos = QPoint(0, 0);
+				emit selectcomplete(true);
+			}
+
+
 		}
 		else
 		{
@@ -348,16 +356,22 @@ void showImage::confirmOval(QMouseEvent *event)    // mouseReleaseEvent
 		endPos = confine(event->pos());
 
 		fillOval(&pix);
-		preArea = Positive(startPos, endPos);
-		shape = mf->Filtered(img, pix, preArea);
 
-		if (leastPix(startPos, endPos) && shape.iNum > 0)
+		if (leastPix(startPos, endPos))
 		{
-			pix = shape.pMat;
-			clearPix(&tempix);
-			update();
-			startPos = curPos = endPos = QPoint(0, 0);
-			emit selectcomplete(true);
+
+			preArea = Positive(startPos, endPos);
+			pix = mf->Filtered(img, pix, preArea, &shape);
+
+			if (shape.iNum > 0)
+			{
+				clearPix(&tempix);
+				update();
+				startPos = curPos = endPos = QPoint(0, 0);
+				emit selectcomplete(true);
+			}
+
+
 		}
 		else
 		{
@@ -375,12 +389,12 @@ void showImage::confirmPoly(QMouseEvent *event)    // mouseReleaseEvent
 	if (hasMouseTracking() && closed)
 	{
 		fillPoly(&pix);
+
 		preArea = Range(polygon);
-		shape = mf->Filtered(img, pix, preArea);
+		pix = mf->Filtered(img, pix, preArea, &shape);
 
 		if (leastRect(preArea) && shape.iNum > 0)
-		{ 
-			pix = shape.pMat;
+		{
 			clearPix(&tempix);
 			polygon.clear();
 			closed = false;
@@ -540,14 +554,14 @@ void showImage::anticolor(void)
 {
 	M = mf->Invert(M);
 	img = mf->MA2QIMG(M, MODE); 
-	update();
+	clearMask(img);
 }
 
 void showImage::grey(bool mode)
 {
 	MODE = mode;
 	img = mf->MA2QIMG(M, MODE); 
-	update();
+	clearMask(img);
 }
 
 void showImage::save(QString fp)

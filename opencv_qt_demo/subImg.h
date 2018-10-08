@@ -18,8 +18,8 @@ private:
 	QPixmap pix;
 	QRect movePos;
 	QMat QM;
-	Mat1f iA;
-	Mat1f divG;
+	SMat1f iA;
+	Mat1i divG;
 	QPoint *innerPos;
 
 	QPoint startPos;

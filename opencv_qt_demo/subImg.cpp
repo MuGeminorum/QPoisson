@@ -119,8 +119,8 @@ void subImg::insert(QMat A)
 	QM = A; 
 	innerPos = (QPoint *)malloc((QM.iNum) * sizeof(QPoint));
 	int k = mf->ipArray(QM.eMat, QM.iNum, &innerPos[0]);
-	iA = mf->iLaplace(QM.eMat, QM.iNum, innerPos);
-	divG = mf->divGArray(QM.iMat, innerPos, QM.iNum);
+	iA = mf->Laplace(k, innerPos);
+	divG = mf->divGArray(QM.iMat, innerPos, k);
 
 	Mat B = QM.iMat;
 	int w = B.cols;
@@ -141,7 +141,6 @@ void subImg::insert(QMat A)
 	{
 		emit fainsert(true);
 	}
-
 }
 
 void subImg::erase(void)

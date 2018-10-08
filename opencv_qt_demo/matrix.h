@@ -13,35 +13,29 @@ public:
 	Mat4b MirrorH(Mat4b);
 	Mat4b Invert(Mat4b);
 	Mat4b Grey(Mat4b);
-
 	Mat4b Clockwise90(Mat4b);
+
 	int ipArray(Mat1b, int, QPoint *);
+	
+	SMat1f Laplace(int, QPoint *);  
+	MatrixX4f Getb(QImage, Mat1i, Mat1b, QPoint, QPoint *);
+	Mat1i divGArray(Mat4b, QPoint *, int);
+	Mat4b Poisson(QImage, MatrixX4f, QPoint, QPoint *);
 
-	QMat Filtered(QImage, QPixmap, QRect);
-
-	Mat1f iLaplace(Mat1b, int, QPoint *);
-	Mat1f Getb(QImage, Mat1f, Mat1b, QPoint, QPoint *);
-
-	Mat4b Possion(QImage, Mat1f, QPoint, QPoint *);
-	QImage toImg(QImage, Mat1f, Mat1f, Mat1b, QPoint *, QPoint);
-
-	Mat1f divGArray(Mat4b, QPoint *, int);
+	QPixmap Filtered(QImage, QPixmap, QRect, QMat *);
+	QImage toImg(QImage, SMat1f, Mat1i, Mat1b, QPoint *, QPoint);
 
 private:
+	
+	int Filter(Mat4b *, QRect *);
 
-	Mat1b newKernal(void); 
-	Mat4b toPix(Mat1b, QRect);
-	Mat1b Filter(Mat4b, QRect);
-	Mat1b Expand(Mat1b , QRect);
+	Mat1b toEig(Mat4b, QRect);
 	Mat1b cutMat(Mat1b, QRect);
-	Mat4b cutArea(QImage, Mat1b, QRect);
-	QRect shrink(Mat1b, QRect); 
+	Mat4b cutImg(QImage, Mat1b, QRect);
+	MatrixX4f pSolver(SMat1f, MatrixX4f);
 
-	double divG(Mat4b, QPoint, int);
-	double Neighbor(Mat4b, Mat1b, QPoint, QPoint, int);
-
-	int isNULL(Mat1b, QRect);
-	bool Conv(Mat1b); 
+	int divG(Mat4b, QPoint, int);
+	int Neighbor(Mat4b, Mat1b, QPoint, QPoint, int);
 	bool adjacent(QPoint, QPoint);
 };
 

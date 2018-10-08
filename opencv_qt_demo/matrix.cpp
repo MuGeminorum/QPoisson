@@ -121,191 +121,152 @@ Mat4b matrix::Invert(Mat4b A)
 
 Mat4b matrix::Clockwise90(Mat4b A)
 {
-	Mat B = Mat::zeros(A.cols, A.rows, CV_8UC4); 
+	Mat4b B = Mat::zeros(A.cols, A.rows, CV_8UC4);
 	transpose(A, B);
 	return MirrorH(B);
 }
 
-Mat1b matrix::newKernal(void)
-{
-	Mat1b kernal = Mat::zeros(3, 3, CV_8UC1);
-
-	kernal.at<uchar>(0, 1) = itoUCHAR(1);
-	kernal.at<uchar>(1, 0) = itoUCHAR(1);
-	kernal.at<uchar>(1, 1) = itoUCHAR(1);
-	kernal.at<uchar>(1, 2) = itoUCHAR(1);
-	kernal.at<uchar>(2, 1) = itoUCHAR(1);
-
-	return kernal;
-}
-
-bool matrix::Conv(Mat1b A)    // make sure Mat A has 1 channel
+int matrix::Filter(Mat4b *C, QRect *qr)
 {
 	int i, j;
 	int n = 0;
+	Mat4b A = *C;
+	QRect r = *qr;
+
 	int w = A.cols;
 	int h = A.rows;
-
-	Mat B = newKernal();
-
-	if (h == B.rows && w == B.cols)
-	{
-		for (i = 0; i < h; i++)
-		{
-			for (j = 0; j < w; j++)
-			{
-				n += toINT(A.at<uchar>(i, j)) * toINT(B.at<uchar>(i, j));  // no need to compute all the block, just deal with the cross.
-			}
-		}
-
-	}
-
-	return (n == 5);
-}
-
-Mat1b matrix::Filter(Mat4b A, QRect r)
-{ 
-	int i, j, m, n;
-	int w = A.cols;
-	int h = A.rows;
-	
-	int xmin = max(r.x(), 0) + 1;
-	int ymin = max(r.y(), 0) + 1;
-	int xmax = min(r.x() + r.width(), w) - 2;
-	int ymax = min(r.y() + r.height(), h) - 2; 
-
-	Mat1b B = Mat::zeros(h, w, CV_8UC1);
-
-	for (i = ymin; i <= ymax; i++)
-	{
-		for (j = xmin; j <= xmax; j++)
-		{
-
-			Mat1b frag = Mat::zeros(3, 3, CV_8UC1);
-			for (m = 0; m < 3; m++)
-			{
-				for (n = 0; n < 3; n++)
-				{
-					frag.at<uchar>(m, n) = isTRUE(A.at<Vec4b>(i - 1 + m, j - 1 + n)[1]);
-				}
-			}			
-			if (Conv(frag)) B.at<uchar>(i, j) = itoUCHAR(1);
-
-		}
-	} 
-	return B;
-}
-
-Mat1b matrix::Expand(Mat1b A, QRect r)
-{ 
-	int i, j;
-
-	Mat B = A;
-	int w = B.cols;
-	int h = B.rows;
 
 	int xmin = max(r.x(), 0) + 1;
 	int ymin = max(r.y(), 0) + 1;
 	int xmax = min(r.x() + r.width(), w) - 2;
 	int ymax = min(r.y() + r.height(), h) - 2;
 
+	Mat4b B = Mat::zeros(h, w, CV_8UC4); 
+
 	for (i = ymin; i <= ymax; i++)
 	{
 		for (j = xmin; j <= xmax; j++)
 		{
-			if (toINT(B.at<uchar>(i, j)) == 1)
+
+			uchar cf = isTRUE(A.at<Vec4b>(i, j)[0]);
+			cf &= isTRUE(A.at<Vec4b>(i - 1, j)[0]);
+			cf &= isTRUE(A.at<Vec4b>(i, j - 1)[0]);
+			cf &= isTRUE(A.at<Vec4b>(i + 1, j)[0]);
+			cf &= isTRUE(A.at<Vec4b>(i, j + 1)[0]);
+
+			if (cf == 0x01)
 			{
-				if (toINT(B.at<uchar>(i - 1, j)) == 0) B.at<uchar>(i - 1, j) = itoUCHAR(2);
-				if (toINT(B.at<uchar>(i + 1, j)) == 0) B.at<uchar>(i + 1, j) = itoUCHAR(2);
-				if (toINT(B.at<uchar>(i, j - 1)) == 0) B.at<uchar>(i, j - 1) = itoUCHAR(2);
-				if (toINT(B.at<uchar>(i, j + 1)) == 0) B.at<uchar>(i, j + 1) = itoUCHAR(2);
+				B.at<Vec4b>(i, j)[0] = itoUCHAR(127);
+				B.at<Vec4b>(i, j)[1] = itoUCHAR(127); 
+				n++;
 			}
+
 		}
 	}
-	return B;
+	
+	if (n > 0)
+	{
+
+		int nxmin = xmax;
+		int nxmax = xmin;
+		int nymin = ymax;
+		int nymax = ymin;
+
+		for (i = ymin; i <= ymax; i++)
+		{
+			for (j = xmin; j <= xmax; j++)
+			{
+				if (toINT(B.at<Vec4b>(i, j)[0]) == 127)
+				{
+					if (toINT(B.at<Vec4b>(i - 1, j)[0]) == 0)
+					{
+						B.at<Vec4b>(i - 1, j)[0] = itoUCHAR(191);
+						B.at<Vec4b>(i - 1, j)[1] = itoUCHAR(64);
+					}
+					if (toINT(B.at<Vec4b>(i + 1, j)[0]) == 0)
+					{
+						B.at<Vec4b>(i + 1, j)[0] = itoUCHAR(191);
+						B.at<Vec4b>(i + 1, j)[1] = itoUCHAR(64);
+					}
+					if (toINT(B.at<Vec4b>(i, j - 1)[0]) == 0)
+					{
+						B.at<Vec4b>(i, j - 1)[0] = itoUCHAR(191);
+						B.at<Vec4b>(i, j - 1)[1] = itoUCHAR(64);
+					}
+					if (toINT(B.at<Vec4b>(i, j + 1)[0]) == 0)
+					{
+						B.at<Vec4b>(i, j + 1)[0] = itoUCHAR(191);
+						B.at<Vec4b>(i, j + 1)[1] = itoUCHAR(64);
+					}
+
+					nxmin = min(nxmin, j);
+					nxmax = max(nxmax, j);
+					nymin = min(nymin, i);
+					nymax = max(nymax, i);
+
+				}
+			}
+		}
+
+		(*C) = B;
+		(*qr) = QRect(nxmin - 1, nymin - 1, nxmax - nxmin + 3, nymax - nymin + 3);
+	}
+
+	return n;
+
+}
+ 
+QPixmap matrix::Filtered(QImage src, QPixmap p, QRect r, QMat *fg)
+{
+	Mat4b A = QIMG2MAT(p.toImage());
+	QRect qr = r;
+
+	int n = Filter(&A, &qr);
+
+	if (n > 0)
+	{ 
+		Mat1b E = toEig(A, qr);
+
+		QMat frag; 
+		frag.eMat = cutMat(E, qr);
+		frag.iMat = cutImg(src, E, qr);
+		frag.iNum = n;
+		(*fg) = frag;
+
+		return QPixmap::fromImage(MA2QIMG(A, false));
+	}
+	else
+	{
+		return p;
+	}
 }
 
-Mat4b matrix::toPix(Mat1b A, QRect r)
-{ 
+Mat1b matrix::toEig(Mat4b A, QRect r)
+{
 	int i, j;
 	int w = A.cols;
 	int h = A.rows;
-	
+
+	Mat1b E = Mat::zeros(h, w, CV_8UC1);
+
 	int xmin = max(r.x(), 0);
 	int ymin = max(r.y(), 0);
 	int xmax = min(r.x() + r.width(), w) - 1;
 	int ymax = min(r.y() + r.height(), h) - 1;
 
-	Mat4b B = Mat::zeros(h, w, CV_8UC4);
-
 	for (i = ymin; i <= ymax; i++)
 	{
 		for (j = xmin; j <= xmax; j++)
 		{
-			int p = toINT(A.at<uchar>(i, j));
-
-			switch (p)
-			{
-			case 1: 
-				B.at<Vec4b>(i, j) = { itoUCHAR(127), itoUCHAR(127), itoUCHAR(0), itoUCHAR(0) };  // alpha and red channels of contain
-				break;
-
-			case 2: 
-				B.at<Vec4b>(i, j) = { itoUCHAR(191), itoUCHAR(64), itoUCHAR(0), itoUCHAR(0) };  // alpha and red channels of bound
-				break;
-
-			default: 
-				break;
-			}
-
+			if (toINT(A.at<Vec4b>(i, j)[0]) == 127) E.at<uchar>(i, j) = itoUCHAR(1);
+			if (toINT(A.at<Vec4b>(i, j)[0]) == 191) E.at<uchar>(i, j) = itoUCHAR(2);
 		}
 	}
 
-	return B;
-} 
-
-QMat matrix::Filtered(QImage src, QPixmap p, QRect r)
-{
-	Mat A = QIMG2MAT(p.toImage());
-	Mat B = Filter(A, r);
-	Mat C = Expand(B, r);
-
-	QRect qr = shrink(C, r);
-	
-	QMat frag;
-	frag.pMat = QPixmap::fromImage(MA2QIMG(toPix(C, qr), false));
-	frag.eMat = cutMat(C, qr);
-	frag.iMat = cutArea(src, C, qr); 
-	frag.iNum = isNULL(C, qr);
-
-	return frag;
+	return E;
 }
 
-int matrix::isNULL(Mat1b A, QRect r)
-{
-	int i, j;
-	int count = 0;
-	int w = A.cols;
-	int h = A.rows;
-	int cn = A.channels();
-
-	int xmin = max(r.x(), 0) + 1;
-	int ymin = max(r.y(), 0) + 1;
-	int xmax = min(r.x() + r.width(), w) - 2;
-	int ymax = min(r.y() + r.height(), h) - 2;
-
-	for (i = ymin; i <= ymax; i++)
-	{
-		for (j = xmin; j <= xmax; j++)
-		{
-			if (toINT(A.at<uchar>(i, j)) == 1) count++;
-		} 
-	}
-
-	return count; 
-}
-
-Mat4b matrix::cutArea(QImage src, Mat1b A, QRect r)
+Mat4b matrix::cutImg(QImage src, Mat1b A, QRect r)
 {
 	int i, j;
 	int w = A.cols;
@@ -330,40 +291,8 @@ Mat4b matrix::cutArea(QImage src, Mat1b A, QRect r)
 	return C;
 }
 
-QRect matrix::shrink(Mat1b A, QRect r)  // make sure Mat A has 1 channel
-{
-	int i, j;
-	int w = A.cols;
-	int h = A.rows;
 
-	int xmin = max(r.x(), 0);
-	int ymin = max(r.y(), 0);
-	int xmax = min(r.x() + r.width(), w) - 1;
-	int ymax = min(r.y() + r.height(), h) - 1;
-
-	int nxmin = xmax;
-	int nxmax = xmin;
-	int nymin = ymax;
-	int nymax = ymin;
-
-	for (i = ymin; i <= ymax; i++)
-	{
-		for (j = xmin; j <= xmax; j++)
-		{
-			if (toINT(A.at<uchar>(i, j)) != 0)
-			{
-				nxmin = min(nxmin, j);
-				nxmax = max(nxmax, j);
-				nymin = min(nymin, i);
-				nymax = max(nymax, i);
-			}
-		}
-	}
-
-	return QRect(nxmin, nymin, nxmax - nxmin + 1, nymax - nymin + 1);
-}
-
-Mat1b matrix::cutMat(Mat1b A, QRect r)  // make sure Mat A has 1 channel
+Mat1b matrix::cutMat(Mat1b A, QRect r)  // make sure Mat A has only 1 channel
 {
 	int i, j;
 	int w = A.cols;
@@ -396,61 +325,66 @@ bool matrix::adjacent(QPoint s, QPoint e)
 	return (Abs(x1 - x2) + Abs(y1 - y2) == 1);
 }
 
-Mat1f matrix::iLaplace(Mat1b A, int n, QPoint ips[])    // A is eigen matrix
+SMat1f matrix::Laplace(int n, QPoint ips[])    // A is eigen matrix
 {
 	int i, j;
-	Mat1f L = Mat::zeros(n, n, CV_32FC1); 
+
+	SMat1f L(n, n);
+	//Mat1f L = Mat::zeros(n, n, CV_32FC1);  // upper is only about 10000 x 10000, which is not large enough
 
 	for (i = 0; i < n; i++)
-	{
+	{ 
 		for (j = 0; j < i + 1; j++)
 		{
 			if (i == j){
-				L.at<float>(i, j) = -4.0;
+				L.insert(i, j) = -4.0;
+				//L.at<float>(i, j) = -4.0; 
 			}
 			else if (adjacent(ips[i], ips[j]))
 			{
-				L.at<float>(i, j) = L.at<float>(j, i) = 1.0;
-			} 
+				L.insert(i, j) = L.insert(j, i) = 1.0;
+				//L.at<float>(i, j) = L.at<float>(j, i) = 1.0;
+			}
+
 		}
 	}
+	L.makeCompressed();
 
 #ifdef PRINT_DEBUG
 	printLap(L);
 #endif
 
-	//invert(L, L, DECOMP_EIG);
-	return L; 
+	return L;
 }
 
-double matrix::divG(Mat4b src, QPoint inp, int k)
+int matrix::divG(Mat4b src, QPoint inp, int k)
 {
 	int x = inp.x();
 	int y = inp.y();
 
-	double s = -4.0 * toINT(src.at<Vec4b>(x, y)[k]);
+	int s = -4 * toINT(src.at<Vec4b>(x, y)[k]);
 
-	s += 1.0 * toINT(src.at<Vec4b>(x - 1, y)[k]);
-	s += 1.0 * toINT(src.at<Vec4b>(x + 1, y)[k]);
-	s += 1.0 * toINT(src.at<Vec4b>(x, y - 1)[k]);
-	s += 1.0 * toINT(src.at<Vec4b>(x, y + 1)[k]);
+	s += toINT(src.at<Vec4b>(x - 1, y)[k]);
+	s += toINT(src.at<Vec4b>(x + 1, y)[k]);
+	s += toINT(src.at<Vec4b>(x, y - 1)[k]);
+	s += toINT(src.at<Vec4b>(x, y + 1)[k]);
 
 	return s;
 }
 
-double matrix::Neighbor(Mat4b dst, Mat1b eig, QPoint tlp, QPoint inp, int k)
+int matrix::Neighbor(Mat4b dst, Mat1b eig, QPoint tlp, QPoint inp, int k)
 {
 	int m = inp.x();
 	int n = inp.y();
 	int i = m + tlp.y();
 	int j = n + tlp.x();
 
-	double s = 0.0;
+	int s = 0;
 
-	if (toINT(eig.at<uchar>(m - 1, n)) == 2) s += 1.0 * toINT(dst.at<Vec4b>(i - 1, j)[k]);
-	if (toINT(eig.at<uchar>(m + 1, n)) == 2) s += 1.0 * toINT(dst.at<Vec4b>(i + 1, j)[k]);
-	if (toINT(eig.at<uchar>(m, n - 1)) == 2) s += 1.0 * toINT(dst.at<Vec4b>(i, j - 1)[k]);
-	if (toINT(eig.at<uchar>(m, n + 1)) == 2) s += 1.0 * toINT(dst.at<Vec4b>(i, j + 1)[k]);
+	if (toINT(eig.at<uchar>(m - 1, n)) == 2) s += toINT(dst.at<Vec4b>(i - 1, j)[k]);
+	if (toINT(eig.at<uchar>(m + 1, n)) == 2) s += toINT(dst.at<Vec4b>(i + 1, j)[k]);
+	if (toINT(eig.at<uchar>(m, n - 1)) == 2) s += toINT(dst.at<Vec4b>(i, j - 1)[k]);
+	if (toINT(eig.at<uchar>(m, n + 1)) == 2) s += toINT(dst.at<Vec4b>(i, j + 1)[k]);
 
 	return s;
 }
@@ -475,44 +409,47 @@ int matrix::ipArray(Mat1b A, int n, QPoint *ips)  // can add fail message of mal
 	return k;
 }
 
-Mat1f matrix::Getb(QImage dst, Mat1f dgs, Mat1b eig, QPoint tlp, QPoint ips[])
+MatrixX4f matrix::Getb(QImage dst, Mat1i dgs, Mat1b eig, QPoint tlp, QPoint ips[])
 {
 	int i, j;
 	int n = dgs.rows;
 	Mat4d D = QIMG2MAT(dst);
-	Mat1f b = Mat::zeros(n, 4, CV_32FC1);
+
+	MatrixX4f b = MatrixX4f::Zero(n, 4);
+	//Mat1f b = Mat::zeros(n, 4, CV_32FC1); 
 
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < 4; j++)
 		{
-			b.at<float>(i, j) = dgs.at<float>(i, j) - Neighbor(D, eig, tlp, ips[i], j);
+			b(i, j) = toFLT(dgs.at<int>(i, j) - Neighbor(D, eig, tlp, ips[i], j));
+			//b.at<float>(i, j) = dgs.at<float>(i, j) - Neighbor(D, eig, tlp, ips[i], j);
 		}
 	}
 	return b;
 }
 
-Mat1f matrix::divGArray(Mat4b src, QPoint ips[], int n)
+Mat1i matrix::divGArray(Mat4b src, QPoint ips[], int n)
 {
 	int i, j;
-	Mat1f g = Mat::zeros(n, 4, CV_32FC1);
+	Mat1i g = Mat::zeros(n, 4, CV_32SC1);
 
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < 4; j++)
 		{
-			g.at<float>(i, j) = divG(src, ips[i], j);
+			g.at<int>(i, j) = divG(src, ips[i], j);
 		}
 	}
 	return g;
 }
   
-Mat4b matrix::Possion(QImage dst, Mat1f sln, QPoint tlp, QPoint ips[])
+Mat4b matrix::Poisson(QImage dst, MatrixX4f sln, QPoint tlp, QPoint ips[])
 {
 	int i, j, k, m;
 	int x = tlp.y();
 	int y = tlp.x();
-	int n = sln.rows;
+	int n = sln.rows();
 	Mat A = QIMG2MAT(dst);
 
 	for (k = 0; k < n; k++)
@@ -521,25 +458,29 @@ Mat4b matrix::Possion(QImage dst, Mat1f sln, QPoint tlp, QPoint ips[])
 		j = ips[k].y() + y;
 		for (m = 0; m < 4; m++)
 		{
-			A.at<Vec4b>(i, j)[m] = itoUCHAR(toINT(sln.at<float>(k, m)));
+			A.at<Vec4b>(i, j)[m] = itoUCHAR(toINT(sln(k, m)));
+			//A.at<Vec4b>(i, j)[m] = itoUCHAR(toINT(sln.at<float>(k, m)));
 		}
 
 	}
 	return A;
 }
 
-QImage matrix::toImg(QImage dst, Mat1f iA, Mat1f divG, Mat1b Eigen, QPoint ips[], QPoint tlp)
+MatrixX4f matrix::pSolver(SMat1f A, MatrixX4f b)
 {
-	Mat1f b = Getb(dst, divG, Eigen, tlp, ips);
-	Mat1f x = Mat::zeros(b.rows, 4, CV_32FC1);
-	//x = iA * b;
-	cv::solve(iA, b, x, DECOMP_EIG);
+	BiCGSTAB<SMat1f> pSolve(A);
+	return pSolve.solve(b);
+}
+
+QImage matrix::toImg(QImage dst, SMat1f A, Mat1i divG, Mat1b Eigen, QPoint ips[], QPoint tlp)
+{
+	MatrixX4f b = Getb(dst, divG, Eigen, tlp, ips);
+	MatrixX4f x = pSolver(A, b);
+	Mat4b p = Poisson(dst, x, tlp, ips);
 
 #ifdef PRINT_DEBUG
-	printsln(x);
+	printsln(p);
 #endif
-
-	Mat4b p = Possion(dst, x, tlp, ips);
 
 	return MA2QIMG(p, false);
 }
