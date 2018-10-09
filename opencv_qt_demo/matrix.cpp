@@ -218,25 +218,21 @@ int matrix::Filter(Mat4b *C, QRect *qr)
  
 QPixmap matrix::Filtered(QImage src, QPixmap p, QRect r, QMat *fg)
 {
-	Mat4b A = QIMG2MAT(p.toImage());
 	QRect qr = r;
-
+	Mat4b A = QIMG2MAT(p.toImage());
 	int n = Filter(&A, &qr);
 
 	if (n > 0)
 	{ 
 		Mat1b E = toEig(A, qr);
-
-		QMat frag; 
-		frag.eMat = cutMat(E, qr);
-		frag.iMat = cutImg(src, E, qr);
-		frag.iNum = n;
-		(*fg) = frag;
-
+		(*fg).eMat = cutMat(E, qr);
+		(*fg).iMat = cutImg(src, E, qr);
+		(*fg).iNum = n; 
 		return QPixmap::fromImage(MA2QIMG(A, false));
 	}
 	else
 	{
+		(*fg).iNum = 0;
 		return p;
 	}
 }
@@ -444,7 +440,7 @@ Mat1i matrix::divGArray(Mat4b src, QPoint ips[], int n)
 	return g;
 }
   
-Mat4b matrix::Poisson(QImage dst, MatrixX4f sln, QPoint tlp, QPoint ips[])
+Mat4b matrix::Poisson(QImage dst, MatrixX4i sln, QPoint tlp, QPoint ips[])
 {
 	int i, j, k, m;
 	int x = tlp.y();
@@ -456,31 +452,49 @@ Mat4b matrix::Poisson(QImage dst, MatrixX4f sln, QPoint tlp, QPoint ips[])
 	{
 		i = ips[k].x() + x;
 		j = ips[k].y() + y;
+
 		for (m = 0; m < 4; m++)
 		{
-			A.at<Vec4b>(i, j)[m] = itoUCHAR(toINT(sln(k, m)));
-			//A.at<Vec4b>(i, j)[m] = itoUCHAR(toINT(sln.at<float>(k, m)));
+			A.at<Vec4b>(i, j)[m] = itoUCHAR(sln(k, m));
 		}
 
 	}
 	return A;
 }
 
-MatrixX4f matrix::pSolver(SMat1f A, MatrixX4f b)
+MatrixX4i matrix::pSolver(SMat1f A, MatrixX4f b)
 {
+	int i, j;
+	int n = b.rows();
 	BiCGSTAB<SMat1f> pSolve(A);
-	return pSolve.solve(b);
+	MatrixX4f x = pSolve.solve(b);
+	MatrixX4i p = MatrixX4i::Zero(n, 4);
+
+	for (i = 0; i < n; i++)
+	{
+
+		p(i, 0) = toRGB(x(i, 0));
+
+		for (j = 1; j < 4; j++)
+		{
+			p(i, j) = toRGB(x(i, j), p(i, 0));
+		}
+
+	}
+
+	return p;
 }
 
 QImage matrix::toImg(QImage dst, SMat1f A, Mat1i divG, Mat1b Eigen, QPoint ips[], QPoint tlp)
 {
 	MatrixX4f b = Getb(dst, divG, Eigen, tlp, ips);
-	MatrixX4f x = pSolver(A, b);
-	Mat4b p = Poisson(dst, x, tlp, ips);
+	MatrixX4i x = pSolver(A, b);
 
 #ifdef PRINT_DEBUG
-	printsln(p);
+	printsln(x);
 #endif
+
+	Mat4b p = Poisson(dst, x, tlp, ips);
 
 	return MA2QIMG(p, false);
 }

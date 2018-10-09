@@ -26,20 +26,39 @@ uchar isTRUE(uchar x)
 	return (x != 0x00) ? 0x01 : 0x00;
 }
 
-uchar itoUCHAR(int x)
+uchar itoUCHAR(int x, int ta)
 {
 	if (x < 0)
 	{
 		return 0x00;
 	}
-	else if (x >= 0 && x <= 255)
+	else if (x >= 0 && x <= ta)
 	{
 		return (x & 0xFF);
 	}
 	else
 	{
-		return 0xFF;
+		return (ta & 0xFF);
 	}
+}
+
+int toRGB(float x, int t)
+{
+	int n = toINT(x);
+
+	if (n < 0)
+	{
+		return 0;
+	}
+	else if (n >= 0 && n <= t)
+	{
+		return n;
+	}
+	else
+	{
+		return t;
+	}
+
 }
 
 #ifdef PRINT_DEBUG
@@ -62,22 +81,16 @@ int digit(int y)
 	}
 }
 
-void printsln(Mat4b b)
+void printsln(MatrixX4f b)
 {
-	FILE *fp = fopen("f:\\downloads\\x.txt", "w");
-	//fprintf_s(fp, "{\n");
-	for (int i = 0; i < b.rows; i++)
-	{
-		//fprintf_s(fp, "{");
+	FILE *fp = fopen("f:\\downloads\\x.txt", "w"); 
+	for (int i = 0; i < b.rows(); i++)
+	{ 
 		for (int j = 0; j < 4; j++)
 		{
-			int cp = toINT(itoUCHAR(toINT(b.at<uchar>(i, j))));
-			//int cp = toINT(itoUCHAR(toINT(b.at<float>(i, j))));
+			int cp = toINT(itoUCHAR(toINT(b(i, j)), toINT(b(i, 0))));
 			if (cp >= 0)
-			{
-				//fprintf_s(fp, (j < 3) ? "+%03d, " : "+%03d ", cp);
-				//fprintf_s(fp, " %03d ", cp);
-				//int d = digit(cp);
+			{ 
 				switch (digit(Abs(cp)))
 				{
 				case 1: fprintf_s(fp, "   %01d ", cp); break;
@@ -88,10 +101,7 @@ void printsln(Mat4b b)
 				}
 			}
 			else
-			{
-				//fprintf_s(fp, (j < 3) ? "-%03d, " : "-%03d ", Abs(cp));
-				//fprintf_s(fp, "%03d ", cp);
-				//int d = digit(cp);
+			{ 
 				switch (digit(Abs(cp)))
 				{
 				case 1: fprintf_s(fp, "  %01d ", cp); break;
@@ -101,40 +111,31 @@ void printsln(Mat4b b)
 					break;
 				}
 			}
-		}
-		//fprintf_s(fp, (i < b.rows - 1) ? "},\n" : "}");
+		} 
 		fprintf_s(fp, "\n");
-	}
-	//fprintf_s(fp, "\n};");
+	} 
 	fclose(fp);
 }
 
 void printLap(SMat1f iA)
 {
-	FILE *fp = fopen("f:\\downloads\\A.txt", "w");
-	//fprintf_s(fp, "{\n");
+	FILE *fp = fopen("f:\\downloads\\A.txt", "w"); 
 	for (int i = 0; i < iA.rows(); i++)
-	{
-		//fprintf_s(fp, "{");
+	{ 
 		for (int j = 0; j < iA.cols(); j++)
 		{
-			int cp = toINT(iA.coeffRef(i, j));
-			//int cp = toINT(iA.at<float>(i, j));
+			int cp = toINT(iA.coeffRef(i, j)); 
 			if (cp >= 0)
-			{
-				//fprintf_s(fp, (j < iA.cols - 1) ? "+%01d, " : "+%01d ", cp);
+			{ 
 				fprintf_s(fp, " %01d ", cp);
 			}
 			else
-			{
-				//fprintf_s(fp, (j < iA.cols - 1) ? "-%01d, " : "-%01d ", Abs(cp));
+			{ 
 				fprintf_s(fp, "%01d ", cp);
 			}
-		}
-		//fprintf_s(fp, (i < iA.rows - 1) ? "},\n" : "}");
+		} 
 		fprintf_s(fp, "\n");
-	}
-	//fprintf_s(fp, "\n};");
+	} 
 	fclose(fp);
 }
 

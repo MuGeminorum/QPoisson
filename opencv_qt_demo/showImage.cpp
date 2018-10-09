@@ -3,14 +3,18 @@
 
 showImage::showImage(QWidget *parent)
 {
-	setupUI(this); 
+	setupUI(this);
+
 	closed = pressing = false;
 	MODE = MODE_RGB;
 	figure = FIGURE_NONE;
-	startPos = curPos = endPos = QPoint(0, 0);
-	preArea.setRect(0, 0, 0, 0);
-
+	
 	shape.iNum = 0;
+	shape.eMat = Mat1b::zeros(2, 2);
+	shape.iMat = Mat4b::zeros(2, 2);
+
+	startPos = curPos = endPos = QPoint(0, 0);
+	preArea = QRect(0, 0, 0, 0);
 }
 
 
@@ -335,7 +339,13 @@ void showImage::confirmRect(QMouseEvent *event)    // mouseReleaseEvent
 				startPos = curPos = endPos = QPoint(0, 0);
 				emit selectcomplete(true);
 			}
-
+			else
+			{
+				clearPix(&pix);
+				clearPix(&tempix);
+				update();
+				startPos = curPos = endPos = QPoint(0, 0);
+			}
 
 		}
 		else
@@ -370,7 +380,13 @@ void showImage::confirmOval(QMouseEvent *event)    // mouseReleaseEvent
 				startPos = curPos = endPos = QPoint(0, 0);
 				emit selectcomplete(true);
 			}
-
+			else
+			{
+				clearPix(&pix);
+				clearPix(&tempix);
+				update();
+				startPos = curPos = endPos = QPoint(0, 0);
+			}
 
 		}
 		else

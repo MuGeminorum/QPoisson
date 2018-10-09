@@ -20,10 +20,11 @@ extern int max(int, int);
 extern int min(int, int);
 extern int Abs(int);
 extern uchar isTRUE(uchar);
-extern uchar itoUCHAR(int);
+extern uchar itoUCHAR(int, int = 255);
+extern int toRGB(float, int = 255);
 
 #ifdef PRINT_DEBUG
-extern void printsln(Mat4b);
+extern void printsln(MatrixX4f);
 extern void printLap(SMat1f);
 #endif
 
