@@ -326,20 +326,17 @@ SMat1f matrix::Laplace(int n, QPoint ips[])    // A is eigen matrix
 	int i, j;
 
 	SMat1f L(n, n);
-	//Mat1f L = Mat::zeros(n, n, CV_32FC1);  // upper is only about 10000 x 10000, which is not large enough
 
 	for (i = 0; i < n; i++)
 	{ 
 		for (j = 0; j < i + 1; j++)
 		{
 			if (i == j){
-				L.insert(i, j) = -4.0;
-				//L.at<float>(i, j) = -4.0; 
+				L.insert(i, j) = -4.0; 
 			}
 			else if (adjacent(ips[i], ips[j]))
 			{
-				L.insert(i, j) = L.insert(j, i) = 1.0;
-				//L.at<float>(i, j) = L.at<float>(j, i) = 1.0;
+				L.insert(i, j) = L.insert(j, i) = 1.0; 
 			}
 
 		}
@@ -411,15 +408,13 @@ MatrixX4f matrix::Getb(QImage dst, Mat1i dgs, Mat1b eig, QPoint tlp, QPoint ips[
 	int n = dgs.rows;
 	Mat4d D = QIMG2MAT(dst);
 
-	MatrixX4f b = MatrixX4f::Zero(n, 4);
-	//Mat1f b = Mat::zeros(n, 4, CV_32FC1); 
+	MatrixX4f b = MatrixX4f::Zero(n, 4); 
 
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < 4; j++)
 		{
-			b(i, j) = toFLT(dgs.at<int>(i, j) - Neighbor(D, eig, tlp, ips[i], j));
-			//b.at<float>(i, j) = dgs.at<float>(i, j) - Neighbor(D, eig, tlp, ips[i], j);
+			b(i, j) = toFLT(dgs.at<int>(i, j) - Neighbor(D, eig, tlp, ips[i], j)); 
 		}
 	}
 	return b;

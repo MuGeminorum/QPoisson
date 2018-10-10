@@ -239,6 +239,8 @@ void opencv_qt_demo::connectWidgets(QMainWindow *opencv_qt_demoClass)
 	QObject::connect(subimgBox, SIGNAL(fainsert(bool)), this, SLOT(insertFailed(bool)));
 
 	QObject::connect(actionPossion, SIGNAL(toggled(bool)), subimgBox, SLOT(possion(bool)));
+	QObject::connect(actionExport, SIGNAL(triggered()), this, SLOT(exportImg()));
+	QObject::connect(this, SIGNAL(expImg(QString)), subimgBox, SLOT(save(QString)));
 }
 
 void opencv_qt_demo::retranslateUi(QMainWindow *opencv_qt_demoClass)
