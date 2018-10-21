@@ -1,7 +1,7 @@
 QPoisson
 ===============
 
-[![license](https://img.shields.io/github/license/zigzagbob/QPoisson.svg)](https://www.gnu.org/licenses/mit.en.html)
+[![license](https://img.shields.io/github/license/zigzagbob/QPoisson.svg)](https://github.com/zigzagbob/QPoisson/blob/master/LICENSE)
 [![AppVeyor](https://img.shields.io/appveyor/ci/zigzagbob/QPoisson.svg)](https://ci.appveyor.com/project/zigzagbob/QPoisson)
 [![Github All Releases](https://img.shields.io/github/downloads/zigzagbob/QPoisson/total.svg)](https://github.com/zigzagbob/QPoisson/releases)
 [![GitHub release](https://img.shields.io/github/release/zigzagbob/QPoisson.svg)](https://github.com/zigzagbob/QPoisson/releases/latest)
