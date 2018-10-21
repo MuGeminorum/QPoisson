@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/QPoisson">
+        <file>Resources/file_32px_572850_easyicon.net.ico</file>
+        <file>Resources/contrast_32px_572784_easyicon.net.ico</file>
+        <file>Resources/diskette_32px_572819_easyicon.net.ico</file>
+        <file>Resources/document_diskette_32px_577567_easyicon.net.ico</file>
+        <file>Resources/ellipse_stroked_32px_1168912_easyicon.net.ico</file>
+        <file>Resources/empty_32px_1161884_easyicon.net.ico</file>
+        <file>Resources/eraser_32px_1197080_easyicon.net.ico</file>
+        <file>Resources/file_transfer_32px_572861_easyicon.net.ico</file>
+        <file>Resources/flip_horizontal_32px_572874_easyicon.net.ico</file>
+        <file>Resources/flip_vertical_32px_572875_easyicon.net.ico</file>
+        <file>Resources/match_width_and_height_32px_572964_easyicon.net.ico</file>
+        <file>Resources/polygon_32px_1169471_easyicon.net.ico</file>
+        <file>Resources/protocol_32px_573045_easyicon.net.ico</file>
+        <file>Resources/reload_32px_573065_easyicon.net.ico</file>
+        <file>Resources/rotate_32px_573072_easyicon.net.ico</file>
+        <file>Resources/square_32px_1170579_easyicon.net.ico</file>
+        <file>Resources/windows_32px_573226_easyicon.net.ico</file>
+    </qresource>
+</RCC>
