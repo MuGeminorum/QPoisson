@@ -6,7 +6,7 @@ QPoisson
 [![Github All Releases](https://img.shields.io/github/downloads/zigzagbob/QPoisson/total.svg)](https://github.com/zigzagbob/QPoisson/releases)
 [![GitHub release](https://img.shields.io/github/release/zigzagbob/QPoisson.svg)](https://github.com/zigzagbob/QPoisson/releases/latest)
 
-Possion Blending in Qt Frame
+Poisson Blending in Qt Frame
 
 ![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qps.PNG)
 ![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qpt.PNG)
@@ -14,7 +14,7 @@ Possion Blending in Qt Frame
 
 ## Download ##
 
-Download available at <https://github.com/zigzagbob/FluidS/releases>.
+Download available at <https://github.com/zigzagbob/QPoisson/releases>.
 
 # Build #
 
@@ -52,12 +52,10 @@ $(QTDIR)\lib\qtmaind.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\plugins\platforms
 
 $(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\plugins\platforms\qwindows.lib;winspool.lib;shlwapi.lib;rpcrt4.lib;$(QTDIR)\lib\Qt5PlatformSupport.lib;$(QTDIR)\plugins\imageformats\qdds.lib;$(QTDIR)\plugins\imageformats\qicns.lib;$(QTDIR)\plugins\imageformats\qico.lib;$(QTDIR)\plugins\imageformats\qjp2.lib;$(QTDIR)\plugins\imageformats\qmng.lib;$(QTDIR)\plugins\imageformats\qtga.lib;$(QTDIR)\plugins\imageformats\qtiff.lib;$(QTDIR)\plugins\imageformats\qwbmp.lib;$(QTDIR)\plugins\imageformats\qwebp.lib;$(QTDIR)\lib\Qt5Gui.lib;comdlg32.lib;oleaut32.lib;imm32.lib;winmm.lib;glu32.lib;opengl32.lib;gdi32.lib;$(QTDIR)\lib\qtharfbuzzng.lib;$(QTDIR)\lib\Qt5Core.lib;kernel32.lib;user32.lib;shell32.lib;uuid.lib;ole32.lib;advapi32.lib;ws2_32.lib;mpr.lib;%(AdditionalDependencies)
 
-## License ##
+## Method ##
 
-![MIT License](https://www.gnu.org/graphics/mit.png)
+Core method for blending process is referred from [SIGGRAPH](http://www.cs.ubc.ca/~rbridson/)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf)
 
-[Flat icon set](https://www.easyicon.net/) from [easyicon](https://www.easyicon.net/).
+Computing step is
 
-All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).
-
-If you want to make any modification on these source codes while keeping new codes unprotected by MIT License, please contact me for a sublicense instead.
+b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
