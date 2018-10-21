@@ -54,8 +54,12 @@ $(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\plugins\platforms\q
 
 ## Method ##
 
-Core method for blending process is referred from [SIGGRAPH](http://www.cs.ubc.ca/~rbridson/)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf)
+Core algorithm for blending process is from [SIGGRAPH](https://www.siggraph.org//)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
 
-Computing step is
+Reference on computing method in detail is at <http://eric-yuan.me/poisson-blending/>. But there is one point in the steps that may make readers misunderstand the computation of vector b: the formula of computing b ought to be written as below
 
 b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
+
+instead of
+
+b[i] = div ( G( Source(x,y) ) ) + Neighbor(target i) ;          i=1..N
