@@ -1,7 +1,7 @@
 QPoisson
 ===============
 
-[![license](https://img.shields.io/github/license/zigzagbob/FluidS.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![license](https://img.shields.io/github/license/zigzagbob/QPoisson.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 [![AppVeyor](https://img.shields.io/appveyor/ci/zigzagbob/FluidS.svg)](https://ci.appveyor.com/project/zigzagbob/FluidS)
 [![Github All Releases](https://img.shields.io/github/downloads/zigzagbob/FluidS/total.svg)](https://github.com/zigzagbob/FluidS/releases)
 [![GitHub release](https://img.shields.io/github/release/zigzagbob/FluidS.svg)](https://github.com/zigzagbob/FluidS/releases/latest)
