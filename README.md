@@ -6,7 +6,7 @@ QPoisson
 [![Github All Releases](https://img.shields.io/github/downloads/zigzagbob/QPoisson/total.svg)](https://github.com/zigzagbob/QPoisson/releases)
 [![GitHub release](https://img.shields.io/github/release/zigzagbob/QPoisson.svg)](https://github.com/zigzagbob/QPoisson/releases/latest)
 
-Poisson Blending in Qt Frame
+Implement Possion blending algorithm by a simple photo editor in Qt Frame.
 
 ![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qps.PNG)
 ![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qpt.PNG)
@@ -56,7 +56,7 @@ $(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\plugins\platforms\q
 
 Core algorithm for blending process is from [SIGGRAPH](https://www.siggraph.org//)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
 
-Reference on computing method in detail is at <http://eric-yuan.me/poisson-blending/>. But there is one point in the steps that may make readers misunderstand how to get vector b: the formula of computing b ought to be written as below
+Reference on computing method in detail is at <http://eric-yuan.me/poisson-blending/>. But there is one point in the steps that may make readers misunderstand how to get vector `b`: the formula of computing `b` ought to be written as below
 ```
 b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
 ```
