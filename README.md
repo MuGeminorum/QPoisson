@@ -53,10 +53,10 @@ $(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\plugins\platforms\q
 
 ## License ##
 
-![GPL-v3](https://www.gnu.org/graphics/gplv3-127x51.png)
+![GPL-v3](https://www.gnu.org/graphics/mit-127x51.png)
 
 [Flat icon set](https://www.easyicon.net/550601-Fluid_icon.html) from [easyicon](https://www.easyicon.net/).
 
-All source codes are licensed under [GPL-3.0](https://opensource.org/licenses/GPL-3.0).
+All source codes are licensed under [MIT](https://opensource.org/licenses/MIT).
 
-If you want to make any modification on these source codes while keeping new codes unprotected by GPL-3.0, please contact me for a sublicense instead.
+If you want to make any modification on these source codes while keeping new codes unprotected by MIT License, please contact me for a sublicense instead.
