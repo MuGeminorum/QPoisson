@@ -14,7 +14,7 @@ Implement Possion blending algorithm by a simple photo editor in Qt Frame.
 
 ## Download ##
 
-Download available at <https://github.com/zigzagbob/QPoisson/releases>.
+Download available at <https://github.com/zigzagbob/QPoisson/releases>
 
 # Build #
 
@@ -73,7 +73,7 @@ b[i] = div ( G( Source(x,y) ) ) + Neighbor(target i) ;          i=1..N
 
 ## License ##
 
-[Flat icon set](https://github.com/zigzagbob/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/).
+[Flat icon set](https://github.com/zigzagbob/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/)
 
 All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).
 
