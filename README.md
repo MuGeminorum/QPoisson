@@ -8,8 +8,9 @@ QPoisson
 
 Possion Blending in Qt Frame
 
-![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/fsd.PNG)
-![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/fsv.PNG)
+![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qps.PNG)
+![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qpt.PNG)
+![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qpo.PNG)
 
 ## Download ##
 
