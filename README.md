@@ -6,7 +6,7 @@ QPoisson
 [![Github All Releases](https://img.shields.io/github/downloads/zigzagbob/QPoisson/total.svg)](https://github.com/zigzagbob/QPoisson/releases)
 [![GitHub release](https://img.shields.io/github/release/zigzagbob/QPoisson.svg)](https://github.com/zigzagbob/QPoisson/releases/latest)
 
-Implement Possion blending algorithm in a simple photo editor with Qt Frame.
+Implement Poisson blending algorithm in a simple photo editor with Qt Frame.
 
 ![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qps.PNG)
 ![LE interface](https://github.com/zigzagbob/zigzagbob.github.io/raw/master/RmPNG/qpt.PNG)
