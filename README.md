@@ -62,7 +62,7 @@ Eigen is a C++ template library for linear algebra: matrices, vectors, numerical
 
 Core model for blending process is from [SIGGRAPH](https://www.siggraph.org//)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
 
-Reference on computing method in detail is at <http://eric-yuan.me/poisson-blending/>. But there is one point in the steps that may make readers misunderstand how to get vector `b`: the formula of computing `b` ought to be written as below
+Reference on computing method in detail is at <http://eric-yuan.me/poisson-blending/>. But there is one point in the steps that may make readers misunderstand how to get vector `b`: the formula of computing `b` ought to be written as follow
 ```
 b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
 ```
