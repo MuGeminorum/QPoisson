@@ -24,7 +24,7 @@ Download available at <https://github.com/zigzagbob/QPoisson/releases>
 
 Source of static qt compiler: [qt-everywhere-opensource-src-5.4.0-rc](http://download.qt.io/development_releases/qt/5.4/5.4.0-rc/single/qt-everywhere-opensource-src-5.4.0-rc.zip)
 
-Tutorial(in Chinese) of building static qt compiler: <http://zerois.me/id-36.html>
+Tutorial(in Chinese) of building static qt compiler: <https://blog.csdn.net/fuzimango/article/details/45916167>
 
 ### Dynamic Qt compiler ###
 
