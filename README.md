@@ -73,7 +73,7 @@ b[i] = div ( G( Source(x,y) ) ) + Neighbor(target i) ;          i=1..N
 
 ## License ##
 
-![enter image description here](https://opensource.org/files/OSI_Approved_License.png)
+![enter image description here](https://www.gnu.org/software/mit-scheme/lambda.png)
 
 [Flat icon set](https://github.com/zigzagbob/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/)
 
