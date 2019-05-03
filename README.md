@@ -73,6 +73,8 @@ b[i] = div ( G( Source(x,y) ) ) + Neighbor(target i) ;          i=1..N
 
 ## License ##
 
+![enter image description here](https://opensource.org/files/OSI_Approved_License.png)
+
 [Flat icon set](https://github.com/zigzagbob/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/)
 
 All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).
