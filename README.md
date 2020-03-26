@@ -1,20 +1,20 @@
 QPoisson
 ===============
 
-[![license](https://img.shields.io/github/license/zigzagbob/QPoisson.svg)](https://github.com/zigzagbob/QPoisson/blob/master/LICENSE)
-[![AppVeyor](https://img.shields.io/appveyor/ci/zigzagbob/QPoisson.svg)](https://ci.appveyor.com/project/zigzagbob/QPoisson)
-[![Github All Releases](https://img.shields.io/github/downloads/zigzagbob/QPoisson/total.svg)](https://github.com/zigzagbob/QPoisson/releases)
-[![GitHub release](https://img.shields.io/github/release/zigzagbob/QPoisson.svg)](https://github.com/zigzagbob/QPoisson/releases/latest)
+[![license](https://img.shields.io/github/license/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/blob/master/LICENSE)
+[![AppVeyor](https://img.shields.io/appveyor/ci/george-chou/QPoisson.svg)](https://ci.appveyor.com/project/george-chou/QPoisson)
+[![Github All Releases](https://img.shields.io/github/downloads/george-chou/QPoisson/total.svg)](https://github.com/george-chou/QPoisson/releases)
+[![GitHub release](https://img.shields.io/github/release/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/releases/latest)
 
 Implement Poisson blending algorithm in a simple photo editor with Qt Frame.
 
-![LE interface](https://github.com/zigzagbob/QPoisson/raw/master/cover/qps.PNG)
-![LE interface](https://github.com/zigzagbob/QPoisson/raw/master/cover/qpt.PNG)
-![LE interface](https://github.com/zigzagbob/QPoisson/raw/master/cover/qpo.PNG)
+![LE interface](https://github.com/george-chou/QPoisson/raw/master/cover/qps.PNG)
+![LE interface](https://github.com/george-chou/QPoisson/raw/master/cover/qpt.PNG)
+![LE interface](https://github.com/george-chou/QPoisson/raw/master/cover/qpo.PNG)
 
 ## Download ##
 
-Download available at <https://github.com/zigzagbob/QPoisson/releases>
+Download available at <https://github.com/george-chou/QPoisson/releases>
 
 # Build #
 
@@ -54,7 +54,7 @@ $(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\plugins\platforms\q
 
 ## Template library ##
 
-[Template library](https://github.com/zigzagbob/QPoisson/tree/master/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org/)
+[Template library](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org/)
 
 Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
@@ -75,7 +75,7 @@ b[i] = div ( G( Source(x,y) ) ) + Neighbor(target i) ;          i=1..N
 
 ![enter image description here](https://www.gnu.org/software/mit-scheme/lambda.png)
 
-[Flat icon set](https://github.com/zigzagbob/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/)
+[Flat icon set](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/)
 
 All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).
 
