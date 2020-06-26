@@ -8,7 +8,7 @@ QPoisson
 
 Implement Poisson blending algorithm in a simple photo editor with Qt Frame.
 
-<div align=center>
+<div align=left>
     <img width="605" src="cover/qps.PNG"/>
     <br><b>↓</b><br>
     <img width="605" src="cover/qpt.PNG"/>
@@ -66,20 +66,16 @@ Eigen is a C++ template library for linear algebra: matrices, vectors, numerical
 
 Core model for blending process is from [SIGGRAPH](https://www.siggraph.org//)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
 
-Reference on computing method in detail is at <http://eric-yuan.me/poisson-blending/>. But there is one point in the steps that may make readers misunderstand how to get vector `b`: the formula of computing `b` ought to be written as follow
+The formula of computing vector _#b#_ ought to be written as follow
 ```
 b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
-```
-instead of
-```
-b[i] = div ( G( Source(x,y) ) ) + Neighbor(target i) ;          i=1..N
 ```
 
 ## License ##
 
 ![enter image description here](https://www.gnu.org/software/mit-scheme/lambda.png)
 
-[Flat icon set](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/)
+[Flat icon set](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.net/);
 
 All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).
 
