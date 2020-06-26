@@ -58,15 +58,15 @@ $(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\plugins\platforms\q
 
 ## Template library ##
 
-[Template library](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org/)
+[Template library](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org);
 
 Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
 ## Method ##
 
-Core model for blending process is from [SIGGRAPH](https://www.siggraph.org//)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
+Core model for blending process is from [SIGGRAPH](https://www.siggraph.org)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
 
-The formula of computing vector <b><i>b</i></b> is as follow
+The formula of computing vector <b><i>b</i></b> is as follow:
 ```
 b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
 ```
