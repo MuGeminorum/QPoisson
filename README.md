@@ -17,7 +17,7 @@ Implement Poisson blending algorithm in a simple photo editor with Qt Frame.
 
 ## Download ##
 
-Download available at <https://github.com/george-chou/QPoisson/releases>
+Download available at <https://github.com/george-chou/QPoisson/releases>;
 
 # Build #
 
