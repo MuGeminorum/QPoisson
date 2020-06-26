@@ -1,5 +1,4 @@
-QPoisson
-===============
+# QPoisson
 
 [![license](https://img.shields.io/github/license/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/blob/master/LICENSE)
 [![AppVeyor](https://img.shields.io/appveyor/ci/george-chou/QPoisson.svg)](https://ci.appveyor.com/project/george-chou/QPoisson)
@@ -64,7 +63,7 @@ Eigen is a C++ template library for linear algebra: matrices, vectors, numerical
 
 ## Method ##
 
-Core model for blending process is from [SIGGRAPH](https://www.siggraph.org)'s [`Poisson Image Editing`](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
+Core model for blending process is from [_Poisson Image Editing_](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).
 
 The formula of computing vector <b><i>b</i></b> is as follow:
 ```
