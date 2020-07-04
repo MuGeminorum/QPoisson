@@ -1,4 +1,4 @@
-# QPoisson
+﻿# QPoisson
 
 [![license](https://img.shields.io/github/license/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/blob/master/LICENSE)
 [![AppVeyor](https://img.shields.io/appveyor/ci/george-chou/QPoisson.svg)](https://ci.appveyor.com/project/george-chou/QPoisson)
@@ -8,11 +8,11 @@
 Implement Poisson blending algorithm in a simple photo editor with Qt Frame.
 
 <div align=center>
-    <img width="605" src="cover/qps.PNG"/>
+    <img width="605" src="https://george-chou.github.io/covers/QPoisson/qps.PNG"/>
     <br><b>↓</b><br>
-    <img width="605" src="cover/qpt.PNG"/>
+    <img width="605" src="https://george-chou.github.io/covers/QPoisson/qpt.PNG"/>
     <br><b>↓</b><br>
-    <img width="605" src="cover/qpo.PNG"/>
+    <img width="605" src="https://george-chou.github.io/covers/QPoisson/qpo.PNG"/>
 </div>
 
 ## Download ##
