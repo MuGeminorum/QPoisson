@@ -1,4 +1,6 @@
-﻿# QPoisson
+# QPoisson
+
+Poisson Blending in Qt Frame
 
 [![license](https://img.shields.io/github/license/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/blob/master/LICENSE)
 [![AppVeyor](https://img.shields.io/appveyor/ci/george-chou/QPoisson.svg)](https://ci.appveyor.com/project/george-chou/QPoisson)
