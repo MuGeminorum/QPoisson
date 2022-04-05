@@ -34,3 +34,16 @@ Win32/Release/QPoisson.exp
 Win32/Release/QPoisson.lib
 QPoisson.sdf
 QPoisson.v12.suo
+QPoisson/debug/dstImg.obj
+QPoisson/debug/main.obj
+QPoisson/debug/mat.obj
+QPoisson/debug/moc_dstImg.cpp
+QPoisson/debug/moc_qpoisson.cpp
+QPoisson/debug/moc_srcImg.cpp
+QPoisson/debug/qpoisson.obj
+QPoisson/debug/qpoisson.pdb
+QPoisson/debug/srcImg.obj
+QPoisson/debug/stdafx.obj
+QPoisson/Makefile
+QPoisson/Makefile.Debug
+QPoisson/Makefile.Release
