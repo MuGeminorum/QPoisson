@@ -47,3 +47,7 @@ QPoisson/debug/stdafx.obj
 QPoisson/Makefile
 QPoisson/Makefile.Debug
 QPoisson/Makefile.Release
+ipch/qpoisson-bc88199a/qpoisson-2d065d02.ipch
+QPoisson/QPoisson.vcxproj
+QPoisson/QPoisson.vcxproj.user
+QPoisson/Release/QPoisson.Build.CppClean.log
