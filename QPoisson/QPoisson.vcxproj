@@ -112,6 +112,7 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dstImg.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mat.cpp" />
     <ClCompile Include="QPoisson.cpp" />
