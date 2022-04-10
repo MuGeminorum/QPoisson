@@ -3,7 +3,6 @@
 
 class srcImg : public QWidget
 {
-
 	Q_OBJECT
 
 public:
