@@ -1,4 +1,5 @@
 #pragma once
+
 class mat
 {
 public:
@@ -24,9 +25,12 @@ public:
 	QImage toImg(QImage, SMat1f, MatrixX4i, Mat1b, QPoint *, QPoint);
 
 private:
-
 	bool adjacent(QPoint, QPoint);
 
+	uchar isTRUE(uchar);
+	uchar itoUCHAR(int, int = 255);
+	int toRGB(float, int = 255);
+	
 	int Filter(Mat4b *, QRect *);
 	int divG(Mat4b, QPoint, int);
 	int Neighbor(Mat4b, Mat1b, QPoint, QPoint, int);
@@ -42,5 +46,3 @@ private:
 
 	Mat4b transpose(Mat4b);
 };
-
-

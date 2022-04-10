@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "srcImg.h"
 
+using namespace std;
 
 srcImg::srcImg(QWidget *parent)
 {
@@ -147,7 +148,7 @@ void srcImg::drawPoly(QMouseEvent *event)    // mousePressEvent
 	{
 		emit selectcomplete(false);
 		endPos = event->pos();
-		int vertex = Abs(polygon.count());
+		int vertex = abs(polygon.count());
 
 		switch (vertex)
 		{
@@ -216,12 +217,12 @@ void srcImg::drawPoly(QMouseEvent *event)    // mousePressEvent
 
 bool srcImg::Neighbor(QPoint src, QPoint dst)
 {
-	return (Abs(src.x() - dst.x()) <= 1) && (Abs(src.y() - dst.y()) <= 1);
+	return (abs(src.x() - dst.x()) <= 1) && (abs(src.y() - dst.y()) <= 1);
 }
 
 bool srcImg::leastPix(QPoint src, QPoint dst)
 {
-	return (Abs(dst.x() - src.x()) >= 2) && (Abs(dst.y() - src.y()) >= 2);
+	return (abs(dst.x() - src.x()) >= 2) && (abs(dst.y() - src.y()) >= 2);
 }
 
 bool srcImg::leastRect(QRect r)
