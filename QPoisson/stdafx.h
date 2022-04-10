@@ -1,3 +1,6 @@
+#ifndef STDAFX_H
+#define STDAFX_H
+
 #include <QtWidgets>
 #include <Eigen\Eigen>
 
@@ -36,3 +39,5 @@ struct QMat
 	Mat1b eMat;
 	int iNum;
 };
+
+#endif // stdafx

@@ -1,13 +1,5 @@
-#pragma once 
+#pragma once
 #include "mat.h"
-
-#define MODE_RGB false
-#define MODE_GREY true
-
-#define FIGURE_NONE 0
-#define FIGURE_POLY 1
-#define FIGURE_RECT 2
-#define FIGURE_OVAL 3
 
 class srcImg : public QWidget
 {
@@ -85,7 +77,7 @@ protected:
 	void mouseMoveEvent(QMouseEvent *);
 	void mouseReleaseEvent(QMouseEvent *);
 
-	public slots:
+public slots:
 	void turn(void);
 	void rever(void);
 	void reflect(void);
@@ -110,4 +102,3 @@ signals:
 	void inserting(QMat);
 	void cleaned(bool);
 };
-

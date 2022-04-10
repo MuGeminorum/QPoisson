@@ -1,5 +1,28 @@
 #pragma once
 
+#include <QtWidgets>
+#include <Eigen\Eigen>
+
+using namespace Eigen;
+
+typedef Eigen::SparseMatrix<float> SMat1f;
+typedef Eigen::Matrix<uchar, Dynamic, Dynamic> MatrixXb;
+typedef MatrixXb Mat1b;
+
+struct Mat4b
+{
+	MatrixXb ARGB[4];
+	int rows;
+	int cols;
+};
+
+struct QMat
+{
+	Mat4b iMat;
+	Mat1b eMat;
+	int iNum;
+};
+
 class mat
 {
 public:

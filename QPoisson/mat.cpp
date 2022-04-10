@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "mat.h"
 
 using namespace std;

@@ -1,8 +1,13 @@
-#include "stdafx.h"
 #include "qpoisson.h"
 
 #define SUBWIN_BORDER 8
 #define SUBWIN_HEAD 32
+
+#ifdef QT_NO_DEBUG
+#define BASE QString(":/")
+#else
+#define BASE QString("")
+#endif
 
 QPoisson::QPoisson(QWidget *parent)
 	: QMainWindow(parent)
@@ -22,72 +27,72 @@ void QPoisson::setupUi(QMainWindow *opencv_qt_demoClass)
 
 	actionOpen = new QAction(opencv_qt_demoClass);
 	actionOpen->setObjectName(QStringLiteral("actionOpen"));
-	actionOpen->setIcon(QIcon(":/QPoisson/Resources/file_32px_572850_easyicon.net.ico"));
+	actionOpen->setIcon(QIcon(BASE + "QPoisson/Resources/file_32px_572850_easyicon.net.ico"));
 
 	actionSave = new QAction(opencv_qt_demoClass);
 	actionSave->setObjectName(QStringLiteral("actionSave"));
-	actionSave->setIcon(QIcon(":/QPoisson/Resources/diskette_32px_572819_easyicon.net.ico"));
+	actionSave->setIcon(QIcon(BASE + "QPoisson/Resources/diskette_32px_572819_easyicon.net.ico"));
 
 	actionMirrorH = new QAction(opencv_qt_demoClass);
 	actionMirrorH->setObjectName(QStringLiteral("actionMirrorH"));
-	actionMirrorH->setIcon(QIcon(":/QPoisson/Resources/flip_horizontal_32px_572874_easyicon.net.ico"));
+	actionMirrorH->setIcon(QIcon(BASE + "QPoisson/Resources/flip_horizontal_32px_572874_easyicon.net.ico"));
 
 	actionMirrorV = new QAction(opencv_qt_demoClass);
 	actionMirrorV->setObjectName(QStringLiteral("actionMirrorV"));
-	actionMirrorV->setIcon(QIcon(":/QPoisson/Resources/flip_vertical_32px_572875_easyicon.net.ico"));
+	actionMirrorV->setIcon(QIcon(BASE + "QPoisson/Resources/flip_vertical_32px_572875_easyicon.net.ico"));
 
 	actionTurn = new QAction(opencv_qt_demoClass);
 	actionTurn->setObjectName(QStringLiteral("actionTurn"));
-	actionTurn->setIcon(QIcon(":/QPoisson/Resources/reload_32px_573065_easyicon.net.ico"));
+	actionTurn->setIcon(QIcon(BASE + "QPoisson/Resources/reload_32px_573065_easyicon.net.ico"));
 
 	actionInvert = new QAction(opencv_qt_demoClass);
 	actionInvert->setObjectName(QStringLiteral("actionInvert"));
-	actionInvert->setIcon(QIcon(":/QPoisson/Resources/protocol_32px_573045_easyicon.net.ico"));
+	actionInvert->setIcon(QIcon(BASE + "QPoisson/Resources/protocol_32px_573045_easyicon.net.ico"));
 
 	actionGrey = new QAction(opencv_qt_demoClass);
 	actionGrey->setObjectName(QStringLiteral("actionGrey"));
 	actionGrey->setCheckable(true);
-	actionGrey->setIcon(QIcon(":/QPoisson/Resources/contrast_32px_572784_easyicon.net.ico"));
+	actionGrey->setIcon(QIcon(BASE + "QPoisson/Resources/contrast_32px_572784_easyicon.net.ico"));
 
 	actionPolygon = new QAction(opencv_qt_demoClass);
 	actionPolygon->setObjectName(QStringLiteral("actionPolygon"));
 	actionPolygon->setCheckable(true);
-	actionPolygon->setIcon(QIcon(":/QPoisson/Resources/polygon_32px_1169471_easyicon.net.ico"));
+	actionPolygon->setIcon(QIcon(BASE + "QPoisson/Resources/polygon_32px_1169471_easyicon.net.ico"));
 
 	actionRect = new QAction(opencv_qt_demoClass);
 	actionRect->setObjectName(QStringLiteral("actionRect"));
 	actionRect->setCheckable(true);
-	actionRect->setIcon(QIcon(":/QPoisson/Resources/square_32px_1170579_easyicon.net.ico"));
+	actionRect->setIcon(QIcon(BASE + "QPoisson/Resources/square_32px_1170579_easyicon.net.ico"));
 
 	actionOval = new QAction(opencv_qt_demoClass);
 	actionOval->setObjectName(QStringLiteral("actionOval"));
 	actionOval->setCheckable(true);
-	actionOval->setIcon(QIcon(":/QPoisson/Resources/ellipse_stroked_32px_1168912_easyicon.net.ico"));
+	actionOval->setIcon(QIcon(BASE + "QPoisson/Resources/ellipse_stroked_32px_1168912_easyicon.net.ico"));
 
 	actionImport = new QAction(opencv_qt_demoClass);
 	actionImport->setObjectName(QStringLiteral("actionImport"));
-	actionImport->setIcon(QIcon(":/QPoisson/Resources/windows_32px_573226_easyicon.net.ico"));
+	actionImport->setIcon(QIcon(BASE + "QPoisson/Resources/windows_32px_573226_easyicon.net.ico"));
 
 	actionExport = new QAction(opencv_qt_demoClass);
 	actionExport->setObjectName(QStringLiteral("actionExport"));
-	actionExport->setIcon(QIcon(":/QPoisson/Resources/document_diskette_32px_577567_easyicon.net.ico"));
+	actionExport->setIcon(QIcon(BASE + "QPoisson/Resources/document_diskette_32px_577567_easyicon.net.ico"));
 
 	actionInsert = new QAction(opencv_qt_demoClass);
 	actionInsert->setObjectName(QStringLiteral("actionInsert"));
-	actionInsert->setIcon(QIcon(":/QPoisson/Resources/file_transfer_32px_572861_easyicon.net.ico"));
+	actionInsert->setIcon(QIcon(BASE + "QPoisson/Resources/file_transfer_32px_572861_easyicon.net.ico"));
 
 	actionPossion = new QAction(opencv_qt_demoClass);
 	actionPossion->setObjectName(QStringLiteral("actionPossion"));
 	actionPossion->setCheckable(true);
-	actionPossion->setIcon(QIcon(":/QPoisson/Resources/match_width_and_height_32px_572964_easyicon.net.ico"));
+	actionPossion->setIcon(QIcon(BASE + "QPoisson/Resources/match_width_and_height_32px_572964_easyicon.net.ico"));
 
 	actionErase = new QAction(opencv_qt_demoClass);
 	actionErase->setObjectName(QStringLiteral("actionErase"));
-	actionErase->setIcon(QIcon(":/QPoisson/Resources/eraser_32px_1197080_easyicon.net.ico"));
+	actionErase->setIcon(QIcon(BASE + "QPoisson/Resources/eraser_32px_1197080_easyicon.net.ico"));
 
 	actionEmpty = new QAction(opencv_qt_demoClass);
 	actionEmpty->setObjectName(QStringLiteral("actionEmpty"));
-	actionEmpty->setIcon(QIcon(":/QPoisson/Resources/empty_32px_1161884_easyicon.net.ico"));
+	actionEmpty->setIcon(QIcon(BASE + "QPoisson/Resources/empty_32px_1161884_easyicon.net.ico"));
 
 	centralWidget = new QWidget(opencv_qt_demoClass);
 	centralWidget->setObjectName(QStringLiteral("centralWidget"));
