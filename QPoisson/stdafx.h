@@ -15,7 +15,7 @@ typedef MatrixXb Mat1b;
 // #define max(a, b) (((a) > (b)) ? (a) : (b))
 // #define min(a, b) (((a) < (b)) ? (a) : (b))
 
-extern QString getFileName(QString);
+// extern QString getFileName(QString);
 // extern int max(int, int);
 // extern int min(int, int);
 // extern int Abs(int);

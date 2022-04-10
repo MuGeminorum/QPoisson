@@ -1,10 +1,10 @@
 #include "stdafx.h"
 
-QString getFileName(QString fullPath)
-{
-	QFileInfo fileinfo = QFileInfo(fullPath);
-	return fileinfo.fileName();
-}
+// QString getFileName(QString fullPath)
+// {
+// 	QFileInfo fileinfo = QFileInfo(fullPath);
+// 	return fileinfo.fileName();
+// }
 
 // int max(int x, int y)
 // {

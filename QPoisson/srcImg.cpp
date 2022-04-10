@@ -540,7 +540,7 @@ void srcImg::clearMask(QImage img)
 void srcImg::load(QString imgPath)
 {
 	img.load(imgPath);    // here we can add a messagebox to hint wether loading is successful
-	setWindowTitle("Source - " + getFileName(imgPath));
+	setWindowTitle("Source - " + QFileInfo(imgPath).fileName());
 	M = mf->QIMG2MAT(img);
 	clearMask(img);
 	emit LoadComplete();

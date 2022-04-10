@@ -21,7 +21,7 @@ dstImg::~dstImg()
 void dstImg::load(QString imgPath)
 {
 	img.load(imgPath);
-	setWindowTitle("Target - " + getFileName(imgPath));
+	setWindowTitle("Target - " + QFileInfo(imgPath).fileName());
 	M = mf->QIMG2MAT(img);
 	clearMask(img);
 	emit LoadComplete();
