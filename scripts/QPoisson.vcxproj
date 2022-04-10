@@ -114,9 +114,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mat.cpp" />
-    <ClCompile Include="QPoisson.cpp" />
     <ClCompile Include="srcImg.cpp" />
     <ClCompile Include="dstImg.cpp" />
+    <ClCompile Include="QPoisson.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QPoisson.h" />
