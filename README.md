@@ -39,11 +39,17 @@ Installation package of dynamic qt compiler: [qt-opensource-windows-x86-msvc2013
 
 Microsoft Visual Studio 2013 with [qt-vs-addin-1.2.4-opensource](http://download.qt.io/archive/vsaddin/qt-vs-addin-1.2.4-opensource.exe)
 
-## Environment variables ##
+## Environment variables on AppVeyor ##
 
 QTDIR = "C:\Qt\5.4\msvc2013_opengl"
 
 ## Dependencies ##
+
+用VS2013打开工程 - 右键项目 - 属性
+配置选择 活动(Release)
+打开 配置属性 - C/C++ - 代码生成 - 运行库 选择 多线程(/MT)
+打开 配置属性 - 链接器 - 输入 - 附加依赖项 将下述 MT 下的长串字符粘贴进去
+确定
 
 ### MDd ###
 
@@ -56,6 +62,14 @@ $(QTDIR)\lib\qtmaind.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\plugins\platforms
 ### MT ###
 
 $(QTDIR)\lib\qtmain.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\plugins\platforms\qwindows.lib;winspool.lib;shlwapi.lib;rpcrt4.lib;$(QTDIR)\lib\Qt5PlatformSupport.lib;$(QTDIR)\plugins\imageformats\qdds.lib;$(QTDIR)\plugins\imageformats\qicns.lib;$(QTDIR)\plugins\imageformats\qico.lib;$(QTDIR)\plugins\imageformats\qjp2.lib;$(QTDIR)\plugins\imageformats\qmng.lib;$(QTDIR)\plugins\imageformats\qtga.lib;$(QTDIR)\plugins\imageformats\qtiff.lib;$(QTDIR)\plugins\imageformats\qwbmp.lib;$(QTDIR)\plugins\imageformats\qwebp.lib;$(QTDIR)\lib\Qt5Gui.lib;comdlg32.lib;oleaut32.lib;imm32.lib;winmm.lib;glu32.lib;opengl32.lib;gdi32.lib;$(QTDIR)\lib\qtharfbuzzng.lib;$(QTDIR)\lib\Qt5Core.lib;kernel32.lib;user32.lib;shell32.lib;uuid.lib;ole32.lib;advapi32.lib;ws2_32.lib;mpr.lib;%(AdditionalDependencies)
+
+发布方法：
+选择 Release 模式 Win32
+右键项目，选择 Qt Project Settings
+Version 选择 msvc2013_static
+OK
+选择 生成 - 重新生成解决方案
+在工程目录下的 Win32\Release 中取出 .exe
 
 ## Template library ##
 
