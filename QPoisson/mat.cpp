@@ -1,13 +1,56 @@
 #include "stdafx.h"
-#include "mat.h" 
+#include "mat.h"
+
+using namespace std;
+
+#define toINT(x) ((int)(x))
+#define toFLT(x) ((float)(1.0 * (x)))
 
 mat::mat()
 {
 }
 
-
 mat::~mat()
 {
+}
+
+uchar mat::isTRUE(uchar x)
+{
+	return (x != 0x00) ? 0x01 : 0x00;
+}
+
+uchar mat::itoUCHAR(int x, int ta)
+{
+	if (x < 0)
+	{
+		return 0x00;
+	}
+	else if (x >= 0 && x <= ta)
+	{
+		return (x & 0xFF);
+	}
+	else
+	{
+		return (ta & 0xFF);
+	}
+}
+
+int mat::toRGB(float x, int t)
+{
+	int n = toINT(x);
+
+	if (n < 0)
+	{
+		return 0;
+	}
+	else if (n >= 0 && n <= t)
+	{
+		return n;
+	}
+	else
+	{
+		return t;
+	}
 }
 
 QImage mat::MA2QIMG(Mat4b A, bool mode)
@@ -66,7 +109,6 @@ Mat4b mat::QIMG2MAT(QImage img)
 			A.ARGB[1](i, j) = itoUCHAR(qRed(L[j]));
 			A.ARGB[2](i, j) = itoUCHAR(qGreen(L[j]));
 			A.ARGB[3](i, j) = itoUCHAR(qBlue(L[j]));
-
 		}
 	}
 
@@ -109,7 +151,8 @@ Mat4b mat::MirrorV(Mat4b A)
 		{
 			for (k = 0; k < 4; k++)
 			{
-				B.ARGB[k](i, j) = A.ARGB[k](h - i - 1, j);;
+				B.ARGB[k](i, j) = A.ARGB[k](h - i - 1, j);
+				;
 			}
 		}
 	}
@@ -196,7 +239,6 @@ int mat::Filter(Mat4b *C, QRect *qr)
 				B.ARGB[1](i, j) = itoUCHAR(127);
 				n++;
 			}
-
 		}
 	}
 
@@ -239,7 +281,6 @@ int mat::Filter(Mat4b *C, QRect *qr)
 					nxmax = max(nxmax, j);
 					nymin = min(nymin, i);
 					nymax = max(nymax, i);
-
 				}
 			}
 		}
@@ -249,7 +290,6 @@ int mat::Filter(Mat4b *C, QRect *qr)
 	}
 
 	return n;
-
 }
 
 QPixmap mat::Filtered(QImage src, QPixmap p, QRect r, QMat *fg)
@@ -279,7 +319,7 @@ Mat1b mat::toEig(Mat4b A, QRect r)
 	int w = A.cols;
 	int h = A.rows;
 
-	Mat1b E = Mat1b::Zero(h, w);//Mat::zeros(h, w, CV_8UC1);
+	Mat1b E = Mat1b::Zero(h, w); // Mat::zeros(h, w, CV_8UC1);
 
 	int xmin = max(r.x(), 0);
 	int ymin = max(r.y(), 0);
@@ -322,13 +362,13 @@ Mat4b mat::cutImg(QImage src, Mat1b A, QRect r)
 	{
 		for (j = xmin; j <= xmax; j++)
 		{
-			if (toINT(A(i, j)) != 0){
+			if (toINT(A(i, j)) != 0)
+			{
 
 				for (k = 0; k < 4; k++)
 				{
 					C.ARGB[k](i - ymin, j - xmin) = B.ARGB[k](i, j);
 				}
-
 			}
 		}
 	}
@@ -336,8 +376,7 @@ Mat4b mat::cutImg(QImage src, Mat1b A, QRect r)
 	return C;
 }
 
-
-Mat1b mat::cutMat(Mat1b A, QRect r)  // make sure Mat A has only 1 channel
+Mat1b mat::cutMat(Mat1b A, QRect r) // make sure Mat A has only 1 channel
 {
 	int i, j;
 	int w = A.cols();
@@ -367,10 +406,10 @@ bool mat::adjacent(QPoint s, QPoint e)
 	int x2 = e.x();
 	int y2 = e.y();
 
-	return (Abs(x1 - x2) + Abs(y1 - y2) == 1);
+	return (abs(x1 - x2) + abs(y1 - y2) == 1);
 }
 
-SMat1f mat::Laplace(int n, QPoint ips[])    // A is eigen matrix
+SMat1f mat::Laplace(int n, QPoint ips[]) // A is eigen matrix
 {
 	int i, j;
 
@@ -380,14 +419,14 @@ SMat1f mat::Laplace(int n, QPoint ips[])    // A is eigen matrix
 	{
 		for (j = 0; j < i + 1; j++)
 		{
-			if (i == j){
+			if (i == j)
+			{
 				L.insert(i, j) = -4.0;
 			}
 			else if (adjacent(ips[i], ips[j]))
 			{
 				L.insert(i, j) = L.insert(j, i) = 1.0;
 			}
-
 		}
 	}
 	L.makeCompressed();
@@ -419,15 +458,19 @@ int mat::Neighbor(Mat4b dst, Mat1b eig, QPoint tlp, QPoint inp, int k)
 
 	int s = 0;
 
-	if (toINT(eig(m - 1, n)) == 2) s += toINT(dst.ARGB[k](i - 1, j));
-	if (toINT(eig(m + 1, n)) == 2) s += toINT(dst.ARGB[k](i + 1, j));
-	if (toINT(eig(m, n - 1)) == 2) s += toINT(dst.ARGB[k](i, j - 1));
-	if (toINT(eig(m, n + 1)) == 2) s += toINT(dst.ARGB[k](i, j + 1));
+	if (toINT(eig(m - 1, n)) == 2)
+		s += toINT(dst.ARGB[k](i - 1, j));
+	if (toINT(eig(m + 1, n)) == 2)
+		s += toINT(dst.ARGB[k](i + 1, j));
+	if (toINT(eig(m, n - 1)) == 2)
+		s += toINT(dst.ARGB[k](i, j - 1));
+	if (toINT(eig(m, n + 1)) == 2)
+		s += toINT(dst.ARGB[k](i, j + 1));
 
 	return s;
 }
 
-int mat::ipArray(Mat1b A, int n, QPoint *ips)  // can add fail message of malloc
+int mat::ipArray(Mat1b A, int n, QPoint *ips) // can add fail message of malloc
 {
 	int i, j;
 	int k = 0;
@@ -438,7 +481,8 @@ int mat::ipArray(Mat1b A, int n, QPoint *ips)  // can add fail message of malloc
 	{
 		for (j = 0; j < w; j++)
 		{
-			if (toINT(A(i, j)) == 1){
+			if (toINT(A(i, j)) == 1)
+			{
 				*(ips + k) = QPoint(i, j);
 				k++;
 			}
@@ -497,7 +541,6 @@ Mat4b mat::Poisson(QImage dst, MatrixX4i sln, QPoint tlp, QPoint ips[])
 		{
 			A.ARGB[m](i, j) = itoUCHAR(sln(k, m));
 		}
-
 	}
 	return A;
 }
@@ -519,7 +562,6 @@ MatrixX4i mat::pSolver(SMat1f A, MatrixX4f b)
 		{
 			p(i, j) = toRGB(x(i, j), p(i, 0));
 		}
-
 	}
 
 	return p;
