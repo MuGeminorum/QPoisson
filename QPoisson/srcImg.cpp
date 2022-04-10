@@ -1,7 +1,14 @@
-#include "stdafx.h"
 #include "srcImg.h"
 
 using namespace std;
+
+#define MODE_RGB false
+#define MODE_GREY true
+
+#define FIGURE_NONE 0
+#define FIGURE_POLY 1
+#define FIGURE_RECT 2
+#define FIGURE_OVAL 3
 
 srcImg::srcImg(QWidget *parent)
 {
@@ -19,18 +26,15 @@ srcImg::srcImg(QWidget *parent)
 	preArea = QRect(0, 0, 0, 0);
 }
 
-
 srcImg::~srcImg()
 {
 }
-
 
 void srcImg::setupUI(QWidget *opencv_qt_demoClass)
 {
 	opencv_qt_demoClass->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
 	opencv_qt_demoClass->setAutoFillBackground(true);
 }
-
 
 void srcImg::setRect(QPixmap *p, QPoint s, QPoint t)
 {
@@ -55,7 +59,7 @@ void srcImg::setLine(QPixmap *p, QPoint s, QPoint t, Qt::GlobalColor c)
 	QPen tempen(c, 1, Qt::SolidLine);
 	QPainter painter(p);
 	painter.setPen(tempen);
-	painter.drawLine(s, t);  //curPos
+	painter.drawLine(s, t); // curPos
 	painter.end();
 }
 
@@ -112,10 +116,11 @@ void srcImg::clearPix(QPixmap *p)
 	(*p).fill(Qt::transparent);
 }
 
-void srcImg::paintPoly(QPainter *painter)    // paintEvent
+void srcImg::paintPoly(QPainter *painter) // paintEvent
 {
 	(*painter).drawPixmap(QPoint(0, 0), pix);
-	if (polygon.count() > 0) (*painter).drawPixmap(QPoint(0, 0), tempix);
+	if (polygon.count() > 0)
+		(*painter).drawPixmap(QPoint(0, 0), tempix);
 }
 
 void srcImg::setPoint(QPixmap *p, QPoint d)
@@ -138,11 +143,10 @@ bool srcImg::isColinear(QPoint P1, QPoint P2, QPoint P)
 	int x = P.x();
 	int y = P.y();
 
-	return ((x - x2)*(y - y1) == (x - x1)*(y - y2));
-
+	return ((x - x2) * (y - y1) == (x - x1) * (y - y2));
 }
 
-void srcImg::drawPoly(QMouseEvent *event)    // mousePressEvent
+void srcImg::drawPoly(QMouseEvent *event) // mousePressEvent
 {
 	if (event->button() == Qt::LeftButton)
 	{
@@ -208,10 +212,7 @@ void srcImg::drawPoly(QMouseEvent *event)    // mousePressEvent
 				startPos = endPos;
 			}
 			break;
-
-
 		}
-
 	}
 }
 
@@ -257,11 +258,12 @@ QRect srcImg::Range(QPolygon p)
 	return r;
 }
 
-void srcImg::updPoly(QMouseEvent *event)    // mouseMoveEvent
+void srcImg::updPoly(QMouseEvent *event) // mouseMoveEvent
 {
 	if (polygon.count() > 0)
 	{
-		if (polygon.count() > 2) setCursor(Neighbor(event->pos(), polygon.at(0)) ? Qt::CrossCursor : Qt::ArrowCursor);
+		if (polygon.count() > 2)
+			setCursor(Neighbor(event->pos(), polygon.at(0)) ? Qt::CrossCursor : Qt::ArrowCursor);
 		clearPix(&tempix);
 		curPos = event->pos();
 		setLine(&tempix, startPos, curPos, Qt::yellow);
@@ -273,14 +275,12 @@ void srcImg::updPoly(QMouseEvent *event)    // mouseMoveEvent
 	}
 }
 
-
-
-void srcImg::paintRect(QPainter *painter)    // paintEvent
+void srcImg::paintRect(QPainter *painter) // paintEvent
 {
 	(*painter).drawPixmap(QPoint(0, 0), pressing ? tempix : pix);
 }
 
-void srcImg::drawRect(QMouseEvent *event)    // mousePressEvent
+void srcImg::drawRect(QMouseEvent *event) // mousePressEvent
 {
 	if (event->button() == Qt::LeftButton)
 	{
@@ -308,7 +308,7 @@ QRect srcImg::Positive(QPoint s, QPoint e)
 	return QRect(x, y, w, h);
 }
 
-void srcImg::updRect(QMouseEvent *event)    // mouseMoveEvent
+void srcImg::updRect(QMouseEvent *event) // mouseMoveEvent
 {
 	if (pressing)
 	{
@@ -319,7 +319,7 @@ void srcImg::updRect(QMouseEvent *event)    // mouseMoveEvent
 	}
 }
 
-void srcImg::confirmRect(QMouseEvent *event)    // mouseReleaseEvent
+void srcImg::confirmRect(QMouseEvent *event) // mouseReleaseEvent
 {
 	if (!hasMouseTracking() && pressing)
 	{
@@ -348,7 +348,6 @@ void srcImg::confirmRect(QMouseEvent *event)    // mouseReleaseEvent
 				update();
 				startPos = curPos = endPos = QPoint(0, 0);
 			}
-
 		}
 		else
 		{
@@ -360,7 +359,7 @@ void srcImg::confirmRect(QMouseEvent *event)    // mouseReleaseEvent
 	}
 }
 
-void srcImg::confirmOval(QMouseEvent *event)    // mouseReleaseEvent
+void srcImg::confirmOval(QMouseEvent *event) // mouseReleaseEvent
 {
 	if (!hasMouseTracking() && pressing)
 	{
@@ -389,7 +388,6 @@ void srcImg::confirmOval(QMouseEvent *event)    // mouseReleaseEvent
 				update();
 				startPos = curPos = endPos = QPoint(0, 0);
 			}
-
 		}
 		else
 		{
@@ -398,11 +396,10 @@ void srcImg::confirmOval(QMouseEvent *event)    // mouseReleaseEvent
 			update();
 			startPos = curPos = endPos = QPoint(0, 0);
 		}
-
 	}
 }
 
-void srcImg::confirmPoly(QMouseEvent *event)    // mouseReleaseEvent
+void srcImg::confirmPoly(QMouseEvent *event) // mouseReleaseEvent
 {
 	if (hasMouseTracking() && closed)
 	{
@@ -429,16 +426,15 @@ void srcImg::confirmPoly(QMouseEvent *event)    // mouseReleaseEvent
 			update();
 			startPos = curPos = endPos = QPoint(0, 0);
 		}
-
 	}
 }
 
-void srcImg::paintOval(QPainter *painter)    // paintEvent
+void srcImg::paintOval(QPainter *painter) // paintEvent
 {
 	(*painter).drawPixmap(QPoint(0, 0), pressing ? tempix : pix);
 }
 
-void srcImg::drawOval(QMouseEvent *event)    // mousePressEvent
+void srcImg::drawOval(QMouseEvent *event) // mousePressEvent
 {
 	if (event->button() == Qt::LeftButton)
 	{
@@ -447,10 +443,9 @@ void srcImg::drawOval(QMouseEvent *event)    // mousePressEvent
 		pressing = true;
 		startPos = event->pos();
 	}
-
 }
 
-void srcImg::updOval(QMouseEvent *event)    // mouseMoveEvent
+void srcImg::updOval(QMouseEvent *event) // mouseMoveEvent
 {
 	if (pressing)
 	{
@@ -459,9 +454,7 @@ void srcImg::updOval(QMouseEvent *event)    // mouseMoveEvent
 		setOval(&tempix, startPos, curPos);
 		update();
 	}
-
 }
-
 
 void srcImg::paintEvent(QPaintEvent *event)
 {
@@ -470,9 +463,15 @@ void srcImg::paintEvent(QPaintEvent *event)
 
 	switch (figure)
 	{
-	case FIGURE_POLY: paintPoly(&painter); break;
-	case FIGURE_RECT: paintRect(&painter); break;
-	case FIGURE_OVAL: paintOval(&painter); break;
+	case FIGURE_POLY:
+		paintPoly(&painter);
+		break;
+	case FIGURE_RECT:
+		paintRect(&painter);
+		break;
+	case FIGURE_OVAL:
+		paintOval(&painter);
+		break;
 
 	default:
 		break;
@@ -488,9 +487,15 @@ void srcImg::mousePressEvent(QMouseEvent *event)
 {
 	switch (figure)
 	{
-	case FIGURE_POLY: drawPoly(event); break;
-	case FIGURE_RECT: drawRect(event); break;
-	case FIGURE_OVAL: drawOval(event); break;
+	case FIGURE_POLY:
+		drawPoly(event);
+		break;
+	case FIGURE_RECT:
+		drawRect(event);
+		break;
+	case FIGURE_OVAL:
+		drawOval(event);
+		break;
 
 	default:
 		break;
@@ -501,9 +506,15 @@ void srcImg::mouseReleaseEvent(QMouseEvent *event)
 {
 	switch (figure)
 	{
-	case FIGURE_POLY: confirmPoly(event); break;
-	case FIGURE_RECT: confirmRect(event); break;
-	case FIGURE_OVAL: confirmOval(event); break;
+	case FIGURE_POLY:
+		confirmPoly(event);
+		break;
+	case FIGURE_RECT:
+		confirmRect(event);
+		break;
+	case FIGURE_OVAL:
+		confirmOval(event);
+		break;
 
 	default:
 		break;
@@ -514,9 +525,15 @@ void srcImg::mouseMoveEvent(QMouseEvent *event)
 {
 	switch (figure)
 	{
-	case FIGURE_POLY: updPoly(event); break;
-	case FIGURE_RECT: updRect(event); break;
-	case FIGURE_OVAL: updOval(event); break;
+	case FIGURE_POLY:
+		updPoly(event);
+		break;
+	case FIGURE_RECT:
+		updRect(event);
+		break;
+	case FIGURE_OVAL:
+		updOval(event);
+		break;
 
 	default:
 		break;
@@ -531,7 +548,8 @@ void srcImg::clearMask(QImage img)
 	setFixedSize(w, h);
 	clearPix(&pix);
 	clearPix(&tempix);
-	if (polygon.count() > 0) polygon.clear();
+	if (polygon.count() > 0)
+		polygon.clear();
 	update();
 	startPos = curPos = endPos = QPoint(0, 0);
 	emit cleaned(false);
@@ -539,7 +557,7 @@ void srcImg::clearMask(QImage img)
 
 void srcImg::load(QString imgPath)
 {
-	img.load(imgPath);    // here we can add a messagebox to hint wether loading is successful
+	img.load(imgPath); // here we can add a messagebox to hint wether loading is successful
 	setWindowTitle("Source - " + QFileInfo(imgPath).fileName());
 	M = mf->QIMG2MAT(img);
 	clearMask(img);

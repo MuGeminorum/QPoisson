@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "qpoisson.h"
 #include <QtWidgets/QApplication>
 
