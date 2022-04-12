@@ -142,6 +142,9 @@
   <ItemGroup>
     <ClInclude Include="mat.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\Icon.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
     <Import Project="$(QtMsBuild)\qt.targets" />
