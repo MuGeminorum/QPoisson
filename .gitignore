@@ -124,3 +124,11 @@ Win32/Debug/QPoisson.exe
 Win32/Debug/QPoisson.ilk
 Win32/Debug/QPoisson.pdb
 QPoisson/Release/qt_work.log
+.vs/*
+Debug/*
+Release/*
+QPoisson/debug/*
+QPoisson/Release/*
+QPoisson/qpoisson.aps
+QPoisson/Resources/Icon.aps
+QPoisson/resource.h

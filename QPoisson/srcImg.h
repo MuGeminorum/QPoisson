@@ -1,3 +1,10 @@
+#ifdef QT_DEBUG
+#pragma comment (lib,"qtmaind.lib")
+#pragma comment (lib,"Qt5Cored.lib")
+#pragma comment (lib,"Qt5Guid.lib")
+#pragma comment (lib,"Qt5Widgetsd.lib")
+#endif
+
 #pragma once
 #include "mat.h"
 

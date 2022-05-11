@@ -23,7 +23,7 @@
  <layoutDefault spacing="6" margin="11" />
  <pixmapfunction></pixmapfunction>
  <resources>
-   <include location="QPoisson.qrc"/>
+   <include location="qpoisson.qrc"/>
  </resources>
  <connections/>
 </UI>
