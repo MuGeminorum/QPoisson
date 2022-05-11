@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "D:/Qt/Qt5.4.2/5.4/msvc2013_opengl/include/**",
+                "D:/Qt/Qt5.7.1/5.7/msvc2015/include/**",
                 "${workspaceFolder}/**"
             ],
             "defines": [

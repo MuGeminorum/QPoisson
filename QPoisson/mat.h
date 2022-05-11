@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QtWidgets>
-#include <Eigen\Eigen>
+#include <Eigen/Eigen>
 
 using namespace Eigen;
 
