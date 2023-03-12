@@ -50,7 +50,7 @@ public:
 private:
 	bool adjacent(QPoint, QPoint);
 
-	uchar isTRUE(uchar);
+	uchar BOL(uchar);
 	uchar itoUCHAR(int, int = 255);
 	int toRGB(float, int = 255);
 	

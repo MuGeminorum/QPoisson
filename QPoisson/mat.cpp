@@ -2,8 +2,9 @@
 
 using namespace std;
 
-#define toINT(x) ((int)(x))
-#define toFLT(x) ((float)(1.0 * (x)))
+#define INT(x) ((int)(x))
+#define FLT(x) ((float)(1.0 * (x)))
+#define BOL(x) ((x != 0x00) ? 0x01 : 0x00)
 
 mat::mat()
 {
@@ -11,11 +12,6 @@ mat::mat()
 
 mat::~mat()
 {
-}
-
-uchar mat::isTRUE(uchar x)
-{
-	return (x != 0x00) ? 0x01 : 0x00;
 }
 
 uchar mat::itoUCHAR(int x, int ta)
@@ -36,7 +32,7 @@ uchar mat::itoUCHAR(int x, int ta)
 
 int mat::toRGB(float x, int t)
 {
-	int n = toINT(x);
+	int n = INT(x);
 
 	if (n < 0)
 	{
@@ -64,10 +60,10 @@ QImage mat::MA2QIMG(Mat4b A, bool mode)
 	{
 		for (j = 0; j < w; j++)
 		{
-			a = toINT(A.ARGB[0](i, j));
-			r = toINT(A.ARGB[1](i, j));
-			g = toINT(A.ARGB[2](i, j));
-			b = toINT(A.ARGB[3](i, j));
+			a = INT(A.ARGB[0](i, j));
+			r = INT(A.ARGB[1](i, j));
+			g = INT(A.ARGB[2](i, j));
+			b = INT(A.ARGB[3](i, j));
 
 			img.setPixel(j, i, mode ? qRgba((r + g + b) / 3, (r + g + b) / 3, (r + g + b) / 3, a) : qRgba(r, g, b, a));
 		}
@@ -80,6 +76,7 @@ Mat4b mat::newMat4b(int h, int w)
 {
 	int i;
 	Mat4b A;
+
 	A.rows = h;
 	A.cols = w;
 
@@ -96,7 +93,6 @@ Mat4b mat::QIMG2MAT(QImage img)
 	int i, j;
 	int w = img.width();
 	int h = img.height();
-
 	Mat4b A = newMat4b(h, w);
 
 	for (i = 0; i < h; i++)
@@ -119,7 +115,6 @@ Mat4b mat::MirrorH(Mat4b A)
 	int i, j, k;
 	int w = A.cols;
 	int h = A.rows;
-
 	Mat4b B = newMat4b(h, w);
 
 	for (i = 0; i < h; i++)
@@ -141,7 +136,6 @@ Mat4b mat::MirrorV(Mat4b A)
 	int i, j, k;
 	int w = A.cols;
 	int h = A.rows;
-
 	Mat4b B = newMat4b(h, w);
 
 	for (i = 0; i < h; i++)
@@ -151,7 +145,6 @@ Mat4b mat::MirrorV(Mat4b A)
 			for (k = 0; k < 4; k++)
 			{
 				B.ARGB[k](i, j) = A.ARGB[k](h - i - 1, j);
-				;
 			}
 		}
 	}
@@ -164,8 +157,8 @@ Mat4b mat::Invert(Mat4b A)
 	int i, j, k;
 	int w = A.cols;
 	int h = A.rows;
-
 	Mat4b B = newMat4b(h, w);
+
 	B.ARGB[0] = A.ARGB[0];
 
 	for (i = 0; i < h; i++)
@@ -187,7 +180,6 @@ Mat4b mat::transpose(Mat4b A)
 	int i;
 	int h = A.cols;
 	int w = A.rows;
-
 	Mat4b B = newMat4b(h, w);
 
 	for (i = 0; i < 4; i++)
@@ -200,8 +192,7 @@ Mat4b mat::transpose(Mat4b A)
 
 Mat4b mat::Clockwise90(Mat4b A)
 {
-	Mat4b B = transpose(A);
-	return MirrorH(B);
+	return MirrorH(transpose(A));
 }
 
 int mat::Filter(Mat4b *C, QRect *qr)
@@ -210,27 +201,24 @@ int mat::Filter(Mat4b *C, QRect *qr)
 	int n = 0;
 	Mat4b A = *C;
 	QRect r = *qr;
-
 	int w = A.cols;
 	int h = A.rows;
-
 	int xmin = max(r.x(), 0) + 1;
 	int ymin = max(r.y(), 0) + 1;
 	int xmax = min(r.x() + r.width(), w) - 2;
 	int ymax = min(r.y() + r.height(), h) - 2;
-
 	Mat4b B = newMat4b(h, w);
 
 	for (i = ymin; i <= ymax; i++)
 	{
 		for (j = xmin; j <= xmax; j++)
 		{
+			uchar cf = BOL(A.ARGB[0](i, j));
 
-			uchar cf = isTRUE(A.ARGB[0](i, j));
-			cf &= isTRUE(A.ARGB[0](i - 1, j));
-			cf &= isTRUE(A.ARGB[0](i, j - 1));
-			cf &= isTRUE(A.ARGB[0](i + 1, j));
-			cf &= isTRUE(A.ARGB[0](i, j + 1));
+			cf &= BOL(A.ARGB[0](i - 1, j));
+			cf &= BOL(A.ARGB[0](i, j - 1));
+			cf &= BOL(A.ARGB[0](i + 1, j));
+			cf &= BOL(A.ARGB[0](i, j + 1));
 
 			if (cf == 0x01)
 			{
@@ -243,7 +231,6 @@ int mat::Filter(Mat4b *C, QRect *qr)
 
 	if (n > 0)
 	{
-
 		int nxmin = xmax;
 		int nxmax = xmin;
 		int nymin = ymax;
@@ -253,24 +240,24 @@ int mat::Filter(Mat4b *C, QRect *qr)
 		{
 			for (j = xmin; j <= xmax; j++)
 			{
-				if (toINT(B.ARGB[0](i, j)) == 127)
+				if (INT(B.ARGB[0](i, j)) == 127)
 				{
-					if (toINT(B.ARGB[0](i - 1, j)) == 0)
+					if (INT(B.ARGB[0](i - 1, j)) == 0)
 					{
 						B.ARGB[0](i - 1, j) = itoUCHAR(191);
 						B.ARGB[1](i - 1, j) = itoUCHAR(64);
 					}
-					if (toINT(B.ARGB[0](i + 1, j)) == 0)
+					if (INT(B.ARGB[0](i + 1, j)) == 0)
 					{
 						B.ARGB[0](i + 1, j) = itoUCHAR(191);
 						B.ARGB[1](i + 1, j) = itoUCHAR(64);
 					}
-					if (toINT(B.ARGB[0](i, j - 1)) == 0)
+					if (INT(B.ARGB[0](i, j - 1)) == 0)
 					{
 						B.ARGB[0](i, j - 1) = itoUCHAR(191);
 						B.ARGB[1](i, j - 1) = itoUCHAR(64);
 					}
-					if (toINT(B.ARGB[0](i, j + 1)) == 0)
+					if (INT(B.ARGB[0](i, j + 1)) == 0)
 					{
 						B.ARGB[0](i, j + 1) = itoUCHAR(191);
 						B.ARGB[1](i, j + 1) = itoUCHAR(64);
@@ -300,14 +287,17 @@ QPixmap mat::Filtered(QImage src, QPixmap p, QRect r, QMat *fg)
 	if (n > 0)
 	{
 		Mat1b E = toEig(A, qr);
+
 		(*fg).eMat = cutMat(E, qr);
 		(*fg).iMat = cutImg(src, E, qr);
 		(*fg).iNum = n;
+
 		return QPixmap::fromImage(MA2QIMG(A, false));
 	}
 	else
 	{
 		(*fg).iNum = 0;
+
 		return p;
 	}
 }
@@ -317,9 +307,7 @@ Mat1b mat::toEig(Mat4b A, QRect r)
 	int i, j;
 	int w = A.cols;
 	int h = A.rows;
-
 	Mat1b E = Mat1b::Zero(h, w); // Mat::zeros(h, w, CV_8UC1);
-
 	int xmin = max(r.x(), 0);
 	int ymin = max(r.y(), 0);
 	int xmax = min(r.x() + r.width(), w) - 1;
@@ -329,11 +317,11 @@ Mat1b mat::toEig(Mat4b A, QRect r)
 	{
 		for (j = xmin; j <= xmax; j++)
 		{
-			if (toINT(A.ARGB[0](i, j)) == 127)
+			if (INT(A.ARGB[0](i, j)) == 127) // is content
 			{
 				E(i, j) = itoUCHAR(1);
 			}
-			else if (toINT(A.ARGB[0](i, j)) == 191)
+			else if (INT(A.ARGB[0](i, j)) == 191) // is border
 			{
 				E(i, j) = itoUCHAR(2);
 			}
@@ -348,12 +336,10 @@ Mat4b mat::cutImg(QImage src, Mat1b A, QRect r)
 	int i, j, k;
 	int w = A.cols();
 	int h = A.rows();
-
 	int xmin = max(r.x(), 0);
 	int ymin = max(r.y(), 0);
 	int xmax = min(r.x() + r.width(), w) - 1;
 	int ymax = min(r.y() + r.height(), h) - 1;
-
 	Mat4b B = QIMG2MAT(src);
 	Mat4b C = newMat4b(r.height(), r.width());
 
@@ -361,9 +347,8 @@ Mat4b mat::cutImg(QImage src, Mat1b A, QRect r)
 	{
 		for (j = xmin; j <= xmax; j++)
 		{
-			if (toINT(A(i, j)) != 0)
+			if (INT(A(i, j)) != 0)
 			{
-
 				for (k = 0; k < 4; k++)
 				{
 					C.ARGB[k](i - ymin, j - xmin) = B.ARGB[k](i, j);
@@ -380,12 +365,10 @@ Mat1b mat::cutMat(Mat1b A, QRect r) // make sure Mat A has only 1 channel
 	int i, j;
 	int w = A.cols();
 	int h = A.rows();
-
 	int xmin = max(r.x(), 0);
 	int ymin = max(r.y(), 0);
 	int xmax = min(r.x() + r.width(), w) - 1;
 	int ymax = min(r.y() + r.height(), h) - 1;
-
 	Mat1b B = Mat1b::Zero(r.height(), r.width());
 
 	for (i = ymin; i <= ymax; i++)
@@ -408,10 +391,9 @@ bool mat::adjacent(QPoint s, QPoint e)
 	return (abs(x1 - x2) + abs(y1 - y2) == 1);
 }
 
-SMat1f mat::Laplace(int n, QPoint ips[]) // A is eigen matrix
+SMat1f mat::Laplace(int n, QPoint ips[])
 {
 	int i, j;
-
 	SMat1f L(n, n);
 
 	for (i = 0; i < n; i++)
@@ -428,6 +410,7 @@ SMat1f mat::Laplace(int n, QPoint ips[]) // A is eigen matrix
 			}
 		}
 	}
+
 	L.makeCompressed();
 
 	return L;
@@ -437,13 +420,12 @@ int mat::divG(Mat4b src, QPoint inp, int k)
 {
 	int x = inp.x();
 	int y = inp.y();
+	int s = -4 * INT(src.ARGB[k](x, y));
 
-	int s = -4 * toINT(src.ARGB[k](x, y));
-
-	s += toINT(src.ARGB[k](x - 1, y));
-	s += toINT(src.ARGB[k](x + 1, y));
-	s += toINT(src.ARGB[k](x, y - 1));
-	s += toINT(src.ARGB[k](x, y + 1));
+	s += INT(src.ARGB[k](x - 1, y));
+	s += INT(src.ARGB[k](x + 1, y));
+	s += INT(src.ARGB[k](x, y - 1));
+	s += INT(src.ARGB[k](x, y + 1));
 
 	return s;
 }
@@ -454,17 +436,16 @@ int mat::Neighbor(Mat4b dst, Mat1b eig, QPoint tlp, QPoint inp, int k)
 	int n = inp.y();
 	int i = m + tlp.y();
 	int j = n + tlp.x();
-
 	int s = 0;
 
-	if (toINT(eig(m - 1, n)) == 2)
-		s += toINT(dst.ARGB[k](i - 1, j));
-	if (toINT(eig(m + 1, n)) == 2)
-		s += toINT(dst.ARGB[k](i + 1, j));
-	if (toINT(eig(m, n - 1)) == 2)
-		s += toINT(dst.ARGB[k](i, j - 1));
-	if (toINT(eig(m, n + 1)) == 2)
-		s += toINT(dst.ARGB[k](i, j + 1));
+	if (INT(eig(m - 1, n)) == 2)
+		s += INT(dst.ARGB[k](i - 1, j));
+	if (INT(eig(m + 1, n)) == 2)
+		s += INT(dst.ARGB[k](i + 1, j));
+	if (INT(eig(m, n - 1)) == 2)
+		s += INT(dst.ARGB[k](i, j - 1));
+	if (INT(eig(m, n + 1)) == 2)
+		s += INT(dst.ARGB[k](i, j + 1));
 
 	return s;
 }
@@ -480,7 +461,7 @@ int mat::ipArray(Mat1b A, int n, QPoint *ips) // can add fail message of malloc
 	{
 		for (j = 0; j < w; j++)
 		{
-			if (toINT(A(i, j)) == 1)
+			if (INT(A(i, j)) == 1)
 			{
 				*(ips + k) = QPoint(i, j);
 				k++;
@@ -495,16 +476,16 @@ MatrixX4f mat::Getb(QImage dst, MatrixX4i dgs, Mat1b eig, QPoint tlp, QPoint ips
 	int i, j;
 	int n = dgs.rows();
 	Mat4b D = QIMG2MAT(dst);
-
 	MatrixX4f b = MatrixX4f::Zero(n, 4);
 
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < 4; j++)
 		{
-			b(i, j) = toFLT(dgs(i, j) - Neighbor(D, eig, tlp, ips[i], j));
+			b(i, j) = FLT(dgs(i, j) - Neighbor(D, eig, tlp, ips[i], j));
 		}
 	}
+
 	return b;
 }
 
@@ -520,6 +501,7 @@ MatrixX4i mat::divGArray(Mat4b src, QPoint ips[], int n)
 			g(i, j) = divG(src, ips[i], j);
 		}
 	}
+
 	return g;
 }
 
@@ -541,10 +523,11 @@ Mat4b mat::Poisson(QImage dst, MatrixX4i sln, QPoint tlp, QPoint ips[])
 			A.ARGB[m](i, j) = itoUCHAR(sln(k, m));
 		}
 	}
+
 	return A;
 }
 
-MatrixX4i mat::pSolver(SMat1f A, MatrixX4f b)
+MatrixX4i mat::pSolver(SMat1f A, MatrixX4f b) // Solve Ax = b
 {
 	int i, j;
 	int n = b.rows();
@@ -554,7 +537,6 @@ MatrixX4i mat::pSolver(SMat1f A, MatrixX4f b)
 
 	for (i = 0; i < n; i++)
 	{
-
 		p(i, 0) = toRGB(x(i, 0));
 
 		for (j = 1; j < 4; j++)
