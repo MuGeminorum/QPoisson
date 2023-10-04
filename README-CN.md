@@ -2,10 +2,10 @@
 
 在 Windows 上使用 C++ Qt 框架在简单的照片编辑器中实现泊松融合算法。
 
-[![license](https://img.shields.io/github/license/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/blob/master/LICENSE)
-[![AppVeyor](https://img.shields.io/appveyor/ci/george-chou/QPoisson.svg)](https://ci.appveyor.com/project/george-chou/QPoisson)
-[![Github All Releases](https://img.shields.io/github/downloads/george-chou/QPoisson/total.svg)](https://github.com/george-chou/QPoisson/releases)
-[![GitHub release](https://img.shields.io/github/release/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/releases/latest)
+[![license](https://img.shields.io/github/license/MuGeminorum/QPoisson.svg)](https://github.com/MuGeminorum/QPoisson/blob/master/LICENSE)
+[![AppVeyor](https://img.shields.io/appveyor/ci/MuGeminorum/QPoisson.svg)](https://ci.appveyor.com/project/MuGeminorum/QPoisson)
+[![Github All Releases](https://img.shields.io/github/downloads/MuGeminorum/QPoisson/total.svg)](https://github.com/MuGeminorum/QPoisson/releases)
+[![GitHub release](https://img.shields.io/github/release/MuGeminorum/QPoisson.svg)](https://github.com/MuGeminorum/QPoisson/releases/latest)
 
 ## 使用方法
 
@@ -18,7 +18,7 @@
 
 ## 代码下载
 ```
-git clone https://github.com/george-chou/QPoisson.git
+git clone https://github.com/MuGeminorum/QPoisson.git
 ```
 
 ## 环境安装
@@ -75,7 +75,7 @@ git clone https://github.com/george-chou/QPoisson.git
 
 ## 模板库
 
-[模板库](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Eigen) 选择的是 [Eigen库](http://eigen.tuxfamily.org)
+[模板库](https://github.com/MuGeminorum/QPoisson/tree/master/QPoisson/Eigen) 选择的是 [Eigen库](http://eigen.tuxfamily.org)
 
 Eigen 是一个用于线性代数的 C++ 模板库：是矩阵、向量的数值求解器，包含诸多相关算法。
 
@@ -96,4 +96,4 @@ b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
     <img src="https://www.gnu.org/software/mit-scheme/lambda.png" />
 </a>
 
-[平面图标集](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Resources) 来源于 [easyicon](https://www.easyicon.cc/)
+[平面图标集](https://github.com/MuGeminorum/QPoisson/tree/master/QPoisson/Resources) 来源于 [easyicon](https://www.easyicon.cc/)
