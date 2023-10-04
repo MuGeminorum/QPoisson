@@ -2,10 +2,10 @@
 
 Implement Poisson blending algorithm in a simple photo editor with Qt Frame on Windows.
 
-[![license](https://img.shields.io/github/license/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/blob/master/LICENSE)
-[![AppVeyor](https://img.shields.io/appveyor/ci/george-chou/QPoisson.svg)](https://ci.appveyor.com/project/george-chou/QPoisson)
-[![Github All Releases](https://img.shields.io/github/downloads/george-chou/QPoisson/total.svg)](https://github.com/george-chou/QPoisson/releases)
-[![GitHub release](https://img.shields.io/github/release/george-chou/QPoisson.svg)](https://github.com/george-chou/QPoisson/releases/latest)
+[![license](https://img.shields.io/github/license/MuGeminorum/QPoisson.svg)](https://github.com/MuGeminorum/QPoisson/blob/master/LICENSE)
+[![AppVeyor](https://img.shields.io/appveyor/ci/MuGeminorum/QPoisson.svg)](https://ci.appveyor.com/project/MuGeminorum/QPoisson)
+[![Github All Releases](https://img.shields.io/github/downloads/MuGeminorum/QPoisson/total.svg)](https://github.com/MuGeminorum/QPoisson/releases)
+[![GitHub release](https://img.shields.io/github/release/MuGeminorum/QPoisson.svg)](https://github.com/MuGeminorum/QPoisson/releases/latest)
 
 ## Usage
 
@@ -16,7 +16,7 @@ Implement Poisson blending algorithm in a simple photo editor with Qt Frame on W
 
 ## Code download
 ```
-git clone https://github.com/george-chou/QPoisson.git
+git clone https://github.com/MuGeminorum/QPoisson.git
 ```
 
 ## Environment installation, configuration & code debugging, release
@@ -24,7 +24,7 @@ Please refer to this [blog post](https://www.cnblogs.com/georgechou/p/17017063.h
 
 ## Template library ##
 
-[Template library](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org);
+[Template library](https://github.com/MuGeminorum/QPoisson/tree/master/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org);
 
 Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
@@ -41,7 +41,7 @@ b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
 
 ![enter image description here](https://www.gnu.org/software/mit-scheme/lambda.png)
 
-[Flat icon set](https://github.com/george-chou/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.cc);
+[Flat icon set](https://github.com/MuGeminorum/QPoisson/tree/master/QPoisson/Resources) from [easyicon](https://www.easyicon.cc);
 
 All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).
 
