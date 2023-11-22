@@ -6,6 +6,7 @@ Implement Poisson blending algorithm in a simple photo editor with Qt Frame on W
 [![AppVeyor](https://img.shields.io/appveyor/ci/MuGeminorum/QPoisson.svg)](https://ci.appveyor.com/project/MuGeminorum/QPoisson)
 [![Github All Releases](https://img.shields.io/github/downloads/MuGeminorum/QPoisson/total.svg)](https://github.com/MuGeminorum/QPoisson/releases)
 [![GitHub release](https://img.shields.io/github/release/MuGeminorum/QPoisson.svg)](https://github.com/MuGeminorum/QPoisson/releases/latest)
+[![](https://img.shields.io/badge/bilibili-BV1zd4y1J7FG-fc8bab.svg)](https://www.bilibili.com/video/BV1zd4y1J7FG)
 
 ## Usage
 
