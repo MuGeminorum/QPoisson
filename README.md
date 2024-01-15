@@ -14,7 +14,7 @@ Implement Poisson blending algorithm in a simple photo editor with Qt Frame on W
 
 ## Maintenance
 ```bash
-git clone git@gitee.com:MuGeminorum/QPoisson.git
+git clone https://github.com/MuGeminorum/QPoisson.git
 ```
 
 ## Environment installation, configuration & code debugging, release
