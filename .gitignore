@@ -132,3 +132,4 @@ QPoisson/Release/*
 QPoisson/qpoisson.aps
 QPoisson/Resources/Icon.aps
 QPoisson/resource.h
+rename.sh
