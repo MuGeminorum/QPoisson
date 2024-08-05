@@ -23,19 +23,19 @@ cd QPoisson
 ## Environment installation, configuration & code debugging, release
 Please refer to this [blog post](https://www.cnblogs.com/MuGeminorum/p/17017063.html) for this section.
 
-## Template library
-[Template library](https://github.com/MuGeminorum/QPoisson/tree/main/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org);<br>
-Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
+## Dependancy library
+[Dependancy library](https://github.com/MuGeminorum/QPoisson/tree/main/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org);<br>
+Eigen is a C++ library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
 ## Method
 The core model for the blending process is from [_Poisson Image Editing_](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).<br>
-The formula of computing vector <b><i>b</i></b> is as follow:<br>
+The formula of computing vector **_b_** is as follow:<br>
 ```cpp
 b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;  // i=1..N
 ```
 
 ## License
-![enter image description here](https://www.gnu.org/software/mit-scheme/lambda.png)<br>
+![](https://www.gnu.org/software/mit-scheme/lambda.png)<br>
 [Flat icon set](https://github.com/MuGeminorum/QPoisson/tree/main/QPoisson/Resources) from [easyicon](https://www.easyicon.cc);<br>
 All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).<br>
 If you want to make any modification on these source codes while keeping new codes unprotected by MIT License, please contact me for a sublicense instead.
