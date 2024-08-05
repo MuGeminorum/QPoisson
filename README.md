@@ -34,6 +34,4 @@ b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;  // i=1..N
 
 ## License
 ![](https://www.gnu.org/software/mit-scheme/lambda.png)<br>
-[Flat icon set](https://github.com/MuGeminorum/QPoisson/tree/main/QPoisson/Resources) from [easyicon](https://www.easyicon.cc);<br>
-All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT).<br>
-If you want to make any modification on these source codes while keeping new codes unprotected by MIT License, please contact me for a sublicense instead.
+[Flat icon set](https://github.com/MuGeminorum/QPoisson/tree/main/QPoisson/Resources) is from [easyicon](https://www.easyicon.cc); All source codes are licensed under [MIT License](https://opensource.org/licenses/MIT). If you want to make any modification on these source codes while keeping new codes unprotected by MIT License, please contact me for a sublicense instead.
