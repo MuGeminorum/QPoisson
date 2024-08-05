@@ -14,7 +14,7 @@ Implement Poisson blending algorithm in a simple photo editor with Qt Frame on W
 | <b>Click ![](https://user-images.githubusercontent.com/20459298/233123432-9c14faa7-fe41-44f0-9857-0ea282d95cd7.png) to circle an area on src img, then click ![](https://user-images.githubusercontent.com/20459298/233123647-b854bb57-391c-4cd6-bf9c-accd84539437.png) to paste the circled area onto dst img</b> | ![](https://user-images.githubusercontent.com/20459298/233123748-3634ce53-28f4-44c6-9d39-9bccfac3fbf3.PNG) |
 | <b>Click ![](https://user-images.githubusercontent.com/20459298/233123837-eb66ca36-32ac-495d-810a-0db32e5a3ba3.png) to blend the pasted area into dst img</b>                                                                                                                                                      | ![](https://user-images.githubusercontent.com/20459298/233123915-39ee1092-9c09-4e99-9539-e2cd36301e4c.PNG) |
 
-## Maintenance
+## Download
 ```bash
 git clone https://github.com/MuGeminorum/QPoisson.git
 cd QPoisson
@@ -23,9 +23,8 @@ cd QPoisson
 ## Environment installation, configuration & code debugging, release
 Please refer to this [blog post](https://www.cnblogs.com/MuGeminorum/p/17017063.html) for this section.
 
-## Dependancy library
-[Dependancy library](https://github.com/MuGeminorum/QPoisson/tree/main/QPoisson/Eigen) from [Eigen](http://eigen.tuxfamily.org);<br>
-Eigen is a C++ library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
+## Dependency library
+[Eigen](http://eigen.tuxfamily.org) is a C++ library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
 ## Method
 The core model for the blending process is from [_Poisson Image Editing_](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).<br>
