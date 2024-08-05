@@ -27,8 +27,7 @@ Please refer to this [blog post](https://www.cnblogs.com/MuGeminorum/p/17017063.
 [Eigen](http://eigen.tuxfamily.org) is a C++ library for linear algebra: matrices, vectors, numerical solvers, and related algorithms.
 
 ## Method
-The core model for the blending process is from [_Poisson Image Editing_](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).<br>
-The formula of computing vector **_b_** is as follow:<br>
+The core method for the blending process comes from [_Poisson Image Editing_](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf), in which the formula of computing vector **_b_** is as follow:<br>
 ```cpp
 b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;  // i=1..N
 ```
