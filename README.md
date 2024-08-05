@@ -31,7 +31,7 @@ Eigen is a C++ template library for linear algebra: matrices, vectors, numerical
 The core model for the blending process is from [_Poisson Image Editing_](http://www.cs.jhu.edu/~misha/Fall07/Papers/Perez03.pdf).<br>
 The formula of computing vector <b><i>b</i></b> is as follow:<br>
 ```cpp
-b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;          i=1..N
+b[i] = div ( G( Source(x,y) ) ) - Neighbor(target i) ;  // i=1..N
 ```
 
 ## License
